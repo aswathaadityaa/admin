@@ -1,83 +1,101 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="html.css">
+  <link rel="stylesheet" href="html.css"
 </head>
-<body>
-  <header>
-    <h1>SHELF 2.0</h1>
-    <nav>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section id="books">
-      <center><br>
+  <body>
+    <header>
+        
+      <h1>SHELF 2.0</h1>
+          
+      <nav>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <main>
+      <section id="books">
+        <center><br>
         <h2>MANOJ HARI</h2>
-        <br>
-        <ul id="bookname"></ul><BR>
+              <br>
+        <ul>
+          
+   <li>
+           <ul id="bookname" ></ul><BR>
+          </li>
+          
+          
+        </ul>
       </center>
-    </section>
-  </main>
-
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-  <script>
-    var firebaseConfig = {
-      apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
-      authDomain: "shelf-2.firebaseapp.com",
-      databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
-      projectId: "shelf-2",
-      storageBucket: "shelf-2.appspot.com",
-      messagingSenderId: "507397179326",
-      appId: "1:507397179326:web:4c2369079020f5f7a49bef",
-      measurementId: "G-CQ9CENNL89"
-    };
+      </section>
+    </main>
     
-    firebase.initializeApp(firebaseConfig);
-
-    var database = firebase.database();
-    var storage = firebase.storage(); // Initialize Firebase Storage
-
-    var booksRef = database.ref('books');
-    var bookList = document.getElementById('bookname');
-
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+    <script>
+var firebaseConfig = {
+        apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
+        authDomain: "shelf-2.firebaseapp.com",
+        databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
+        projectId: "shelf-2",
+        storageBucket: "shelf-2.appspot.com",
+        messagingSenderId: "507397179326",
+        appId: "1:507397179326:web:4c2369079020f5f7a49bef",
+        measurementId: "G-CQ9CENNL89"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+  
+  // Get a reference to the database service
+  var database = firebase.database();
+  var booksRef = database.ref('books');
+    // Listen for changes in the data
     booksRef.on('value', function(snapshot) {
+      // Clear the book list
+      var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
+      // Loop through the books in the snapshot
       snapshot.forEach(function(childSnapshot) {
+        // Get the data for the book
         var book = childSnapshot.val();
+        // Create a book block element
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
-        
+        // Create heading for book title
         var titleHeading = document.createElement('h3');
         titleHeading.innerText = book.bookname;
         bookBlock.appendChild(titleHeading);
 
+        // Create paragraph for book author
         var authorParagraph = document.createElement('p');
         authorParagraph.innerText = 'Author: ' + book.author;
+        authorParagraph.innerText = 'AUTHOR: ' + book.author;
         bookBlock.appendChild(authorParagraph);
 
+        // Create paragraph for book type
         var typeParagraph = document.createElement('p');
         typeParagraph.innerText = 'Type: ' + book.booktype;
+        typeParagraph.innerText = 'TYPE: ' + book.booktype;
         bookBlock.appendChild(typeParagraph);
 
+        // Create paragraph for book description
         var descParagraph = document.createElement('p');
         descParagraph.innerText = 'Description: ' + book.desc;
+        descParagraph.innerText = 'DESICRIPTION: ' + book.desc;
         bookBlock.appendChild(descParagraph);
 
-       
+        // Append the book block to the book list
         bookList.appendChild(bookBlock);
       });
     });
-  </script>
-</body>
+        </script>
+  </body>
 </html>

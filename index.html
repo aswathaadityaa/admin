@@ -33,7 +33,7 @@
            <ul id="bookname" ></ul><BR>
  
           </li>
-          
+          <div id="imageContainer"></div>
 
           
         </ul>
@@ -100,6 +100,31 @@ var firebaseConfig = {
         
 
       });
+      // Get a reference to the Firebase storage service
+  var storage = firebase.storage();
+
+  // Create a reference to the image file
+  var storageRef = storage.ref('images/image.jpg');
+
+  // Get the download URL of the image
+  storageRef.getDownloadURL()
+    .then(function(url) {
+      // Create an <img> element
+      var img = document.createElement('img');
+
+      // Set the src attribute with the download URL
+      img.src = url;
+
+      // Append the image to a container element
+      var container = document.getElementById('imageContainer');
+      container.appendChild(img);
+    })
+    .catch(function(error) {
+      // Handle any errors
+      console.log(error);
+    });
+
+
     });
 
 

@@ -49,9 +49,11 @@ padding-left: 10%;}
 #books ul {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Updated property */
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  justify-items: center; /* Added property */
 }
+
 
 #books li {
   background-color: #fefefe;

@@ -8,7 +8,6 @@
   <title>Document</title>
   <link rel="stylesheet" href="html.css"
 </head>
-
   <body>
     <header>
         
@@ -31,17 +30,14 @@
           
    <li>
            <ul id="bookname" ></ul><BR>
-  
           </li>
-        
-
+          
           
         </ul>
       </center>
       </section>
     </main>
     
-
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
     <script>
@@ -60,24 +56,19 @@ var firebaseConfig = {
   
   // Get a reference to the database service
   var database = firebase.database();
-
   var booksRef = database.ref('books');
-
     // Listen for changes in the data
     booksRef.on('value', function(snapshot) {
       // Clear the book list
       var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
-
       // Loop through the books in the snapshot
       snapshot.forEach(function(childSnapshot) {
         // Get the data for the book
         var book = childSnapshot.val();
-
         // Create a book block element
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
-
         // Create heading for book title
         var titleHeading = document.createElement('h3');
         titleHeading.innerText = book.bookname;
@@ -85,50 +76,26 @@ var firebaseConfig = {
 
         // Create paragraph for book author
         var authorParagraph = document.createElement('p');
+        authorParagraph.innerText = 'Author: ' + book.author;
         authorParagraph.innerText = 'AUTHOR: ' + book.author;
         bookBlock.appendChild(authorParagraph);
 
         // Create paragraph for book type
         var typeParagraph = document.createElement('p');
+        typeParagraph.innerText = 'Type: ' + book.booktype;
         typeParagraph.innerText = 'TYPE: ' + book.booktype;
         bookBlock.appendChild(typeParagraph);
 
         // Create paragraph for book description
         var descParagraph = document.createElement('p');
+        descParagraph.innerText = 'Description: ' + book.desc;
         descParagraph.innerText = 'DESICRIPTION: ' + book.desc;
         bookBlock.appendChild(descParagraph);
-        
 
+        // Append the book block to the book list
+        bookList.appendChild(bookBlock);
       });
-      // Get a reference to the Firebase storage service
-  var storage = firebase.storage();
-
-  // Create a reference to the image file
-  var storageRef = storage.ref('images/1.png');
-
-  // Get the download URL of the image
-  storageRef.getDownloadURL()
-    .then(function(url) {
-      // Create an <img> element
-      var img = document.createElement('img');
-
-      // Set the src attribute with the download URL
-      img.src = url;
-
-      // Append the image to a container element
-      var container = document.getElementById('imageContainer');
-      container.appendChild(img);
-    })
-    .catch(function(error) {
-      // Handle any errors
-      console.log(error);
     });
-
-
-    });
-
-
-
         </script>
   </body>
 </html>

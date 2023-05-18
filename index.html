@@ -74,16 +74,7 @@
         descParagraph.innerText = 'Description: ' + book.desc;
         bookBlock.appendChild(descParagraph);
 
-        // Fetch the image URL from Firebase Storage
-        var imageRef = storage.ref(book.image);
-        imageRef.getDownloadURL().then(function(url) {
-          var imageElement = document.createElement('img');
-          imageElement.src = url;
-          bookBlock.appendChild(imageElement);
-        }).catch(function(error) {
-          console.log('Error getting image URL: ', error);
-        });
-
+       
         bookList.appendChild(bookBlock);
       });
     });

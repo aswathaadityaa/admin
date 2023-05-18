@@ -29,14 +29,10 @@
               <br>
         <ul>
           
-         <li>
-  <h3 class="book-title">Book Title</h3>
-  <h4 class="book-author">Author Name</h4>
-  <div class="book-info">
-    <p>Additional information about the book.</p>
-    <button class="btn">Close</button>
-  </div>
-</li>
+   <li>
+           <ul id="bookname" ></ul><BR>
+          </li>
+          
 
           
         </ul>
@@ -105,20 +101,7 @@ var firebaseConfig = {
         bookList.appendChild(bookBlock);
       });
     });
-      // Get all the book title elements
-const bookTitles = document.querySelectorAll('.book-title');
 
-// Add click event listener to each book title
-bookTitles.forEach((title) => {
-  title.addEventListener('click', () => {
-    // Get the closest book item
-    const bookItem = title.closest('li');
-
-    // Toggle the visibility of the book info layer
-    const bookInfo = bookItem.querySelector('.book-info');
-    bookInfo.style.display = bookInfo.style.display === 'none' ? 'block' : 'none';
-  });
-});
 
 
         </script>

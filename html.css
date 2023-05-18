@@ -49,7 +49,7 @@ padding-left: 10%;}
 #books ul {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50%, 1fr)); /* Updated property */
+  grid-template-columns: repeat(2, 1fr); /* Updated property */
   gap: 20px;
 }
 
@@ -60,18 +60,19 @@ padding-left: 10%;}
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; /* Added property */
+  align-items: center;
+  text-align: center; /* Added property */
 }
 
 #books li h3 {
   font-size: 20px;
   margin-bottom: 10px;
-  text-align: center; /* Added property */
 }
 
 #books li p {
-  text-align: center; /* Added property */
+  margin-bottom: 10px; /* Added property */
 }
+
 
 
 

@@ -96,6 +96,31 @@ var firebaseConfig = {
         var descParagraph = document.createElement('p');
         descParagraph.innerText = 'DESICRIPTION: ' + book.desc;
         bookBlock.appendChild(descParagraph);
+        
+  // Get a reference to the Firebase storage service
+  var storage = firebase.storage();
+
+  // Create a reference to the image file
+  var storageRef = storage.ref('images/1.png');
+
+  // Get the download URL of the image
+  storageRef.getDownloadURL()
+    .then(function(url) {
+      // Create an <img> element
+      var img = document.createElement('img');
+
+      // Set the src attribute with the download URL
+      img.src = url;
+
+      // Append the image to a container element
+      var container = document.getElementById('imageContainer');
+      container.appendChild(img);
+    })
+    .catch(function(error) {
+      // Handle any errors
+      console.log(error);
+    });
+</script>
 
         // Append the book block to the book list
         bookList.appendChild(bookBlock);

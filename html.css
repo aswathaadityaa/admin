@@ -46,34 +46,46 @@ padding-left: 10%;}
 	margin-bottom: 20px;
 }
 
+
 #books ul {
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 20px;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(50%, 1fr)); /* Updated property */
   gap: 20px;
-  justify-items: center; /* Added property */
 }
 
-
 #books li {
+	background-color: #fefefe;
+	box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
   background-color: #fefefe;
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  text-align: center; /* Added property */
+  align-items: center; /* Added property */
 }
 
 #books li h3 {
+	font-size: 20px;
+	margin-bottom: 10px;
   font-size: 20px;
   margin-bottom: 10px;
+  text-align: center; /* Added property */
 }
 
 #books li p {
-  margin-bottom: 10px; /* Added property */
+  text-align: center; /* Added property */
 }
+
 
 
 

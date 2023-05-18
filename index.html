@@ -63,7 +63,7 @@ var firebaseConfig = {
     // Listen for changes in the data
     booksRef.on('value', function(snapshot) {
       // Clear the book list
-      var bookList = document.getElementById('bookList');
+      var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
 
       // Loop through the books in the snapshot

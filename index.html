@@ -58,36 +58,47 @@ var firebaseConfig = {
   // Get a reference to the database service
   var database = firebase.database();
 
-  // Get a reference to the "items" node in the database
-  var itemsRef = database.ref('books');
-  
-  // Listen for changes in the data
-  itemsRef.on('value', function(snapshot) {
-    // Clear the items list
-    var itemsList = document.getElementById('bookname');
-    itemsList.innerHTML = '';
-  
-    // Loop through the items in the snapshot
-    snapshot.forEach(function(childSnapshot) {
-      // Get the data for the item
-      var item = childSnapshot.val();
-  
-      
-      var listItem = document.createElement('li');
-      listItem.innerText = "BOOK NAME : " + item.bookname
-      itemsList.appendChild(listItem);
-      var listItem = document.createElement('li'); 
-      listItem.innerText = "AUTHOR : " + item.author    
-      itemsList.appendChild(listItem);
-      var listItem = document.createElement('li'); 
-      listItem.innerText = "BOOK TYPE : " + item.booktype    
-      itemsList.appendChild(listItem);
-      var listItem = document.createElement('li'); 
-      listItem.innerText = "DESCRIPTION : " + item.desc    
-      itemsList.appendChild(listItem);
+  var booksRef = database.ref('books');
+
+    // Listen for changes in the data
+    booksRef.on('value', function(snapshot) {
+      // Clear the book list
+      var bookList = document.getElementById('bookList');
+      bookList.innerHTML = '';
+
+      // Loop through the books in the snapshot
+      snapshot.forEach(function(childSnapshot) {
+        // Get the data for the book
+        var book = childSnapshot.val();
+
+        // Create a book block element
+        var bookBlock = document.createElement('li');
+        bookBlock.classList.add('book-block');
+
+        // Create heading for book title
+        var titleHeading = document.createElement('h3');
+        titleHeading.innerText = book.bookname;
+        bookBlock.appendChild(titleHeading);
+
+        // Create paragraph for book author
+        var authorParagraph = document.createElement('p');
+        authorParagraph.innerText = 'Author: ' + book.author;
+        bookBlock.appendChild(authorParagraph);
+
+        // Create paragraph for book type
+        var typeParagraph = document.createElement('p');
+        typeParagraph.innerText = 'Type: ' + book.booktype;
+        bookBlock.appendChild(typeParagraph);
+
+        // Create paragraph for book description
+        var descParagraph = document.createElement('p');
+        descParagraph.innerText = 'Description: ' + book.desc;
+        bookBlock.appendChild(descParagraph);
+
+        // Append the book block to the book list
+        bookList.appendChild(bookBlock);
+      });
     });
-   
-  });
    
         </script>
   </body>

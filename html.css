@@ -63,6 +63,11 @@ main {
   text-align: center;
 }
 
+.book-info {
+  display: none;
+}
+
+
 #books li h3 {
   font-size: 20px;
   margin-bottom: 10px;

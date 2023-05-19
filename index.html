@@ -46,7 +46,7 @@
             .then(function(result) {
               var user = result.user;
               console.log("Authenticated user:", auth.currentUser.displayName);
-              windows.location.href = "index.html";
+              window.location.href = "index.html";
             })
             .catch(function(error) {
               console.log("Authentication error:", error);

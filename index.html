@@ -81,7 +81,7 @@
       font-size: 14px;
       margin: 0;
       margin-top: 10px;
-      font-style : italic;
+      font-style: italic;
     }
   </style>
 </head>
@@ -154,13 +154,10 @@
         bookDetails.appendChild(authorParagraph);
         // Create paragraph for book description (MY VIEWS)
         var descParagraph = document.createElement('p');
-        descParagraph.innerText = book.desc ;
-       
+        descParagraph.innerText = book.desc;
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
         bookBlock.appendChild(bookDetails);
-        // Append the book block to the book list
-        bookList.appendChild(bookBlock);
       });
     });
   </script>

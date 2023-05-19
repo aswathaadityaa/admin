@@ -106,7 +106,8 @@
       <center>
         <br>
         <h2>MANOJ HARI</h2>
- 
+        <h2 id="myprofile"></h2>
+        
         <br>
         <ul id="bookname"></ul>
       </center>
@@ -121,7 +122,7 @@ const displayName = params.get('displayName');
 
 // Use the displayName value as needed
 console.log("User's Display Name:", displayName);
-
+document.getElementbyId("myprofile").innerHTML = displayName;
     var firebaseConfig = {
       apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
       authDomain: "shelf-2.firebaseapp.com",

@@ -128,6 +128,7 @@ var firebaseConfig = {
   };
   
  
+   
     firebase.initializeApp(firebaseConfig);
 
     // Get a reference to the database service
@@ -163,13 +164,13 @@ var firebaseConfig = {
 
         // Create paragraph for book author
         var authorParagraph = document.createElement('p');
-        authorParagraph.innerText = 'by ' + book.author;
+        authorParagraph.innerHTML = '<em>by ' + book.author + '</em>';
         authorParagraph.classList.add('author');
         bookDetails.appendChild(authorParagraph);
 
         // Create paragraph for book description
         var descParagraph = document.createElement('p');
-        descParagraph.innerText =  book.desc;
+        descParagraph.innerText = book.desc;
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
 

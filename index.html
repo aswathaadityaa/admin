@@ -20,6 +20,7 @@ body {
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
+  text-align: center;
 }
 
 button {
@@ -31,6 +32,7 @@ button {
   cursor: pointer;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  margin-top: 24px;
 }
 
 button:hover {
@@ -46,7 +48,6 @@ button:active {
 }
 
 h1 {
-  text-align: center;
   font-size: 24px;
   color: #333;
   margin-bottom: 24px;
@@ -68,7 +69,13 @@ h1 {
 </style>
 </head>
 <body>
-<img src="Untitled-1.png" alt="Image" style="display: block; margin-bottom: 24px;">
+<div class="container">
+  <img src="Untitled-1.png" alt="Image">
+  <h1>Sign in with Google</h1>
+  <button id="google-signin-button">Sign in</button>
+</div>
+
+<script type="module">
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";

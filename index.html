@@ -92,6 +92,11 @@ var firebaseConfig = {
         descParagraph.innerText = 'DESICRIPTION: ' + book.desc;
         bookBlock.appendChild(descParagraph);
 
+          var imgurl = document.createElement('p');
+       imgurl.innerText = 'imgurl: ' + book.imgurl;
+        imgurl.innerText = 'IMAGE: ' + book.imgurl;
+        bookBlock.appendChild(imgurl);
+
         // Append the book block to the book list
         bookList.appendChild(bookBlock);
       });

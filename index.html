@@ -45,12 +45,29 @@ h1 {
   margin-bottom: 24px;
 }
 
- img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      margin-bottom: 24px;
-    }
+img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 24px;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  img {
+    margin-bottom: 12px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
 </style>
 </head>
 <body>

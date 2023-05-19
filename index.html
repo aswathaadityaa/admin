@@ -76,18 +76,6 @@
       margin: 0;
       margin-bottom: 10px;
     }
-    .author {
-      color: #777;
-      margin: 0;
-      font-style: italic;
-      text-align: center;
-    }
-    .description {
-      font-size: 14px;
-      margin: 0;
-      margin-top: 10px;
-      font-style: italic;
-    }
   </style>
 </head>
 <body>
@@ -123,7 +111,7 @@
       appId: "1:507397179326:web:4c2369079020f5f7a49bef",
       measurementId: "G-CQ9CENNL89"
     };
-  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
     // Get a reference to the database service
     var database = firebase.database();
     var booksRef = database.ref('books');
@@ -145,24 +133,10 @@
         bookImage.alt = book.bookname; // Set the alt attribute to the book name
         bookImage.classList.add('book-image');
         bookBlock.appendChild(bookImage);
-        // Create book details element
-        var bookDetails = document.createElement('div');
-        bookDetails.classList.add('book-details');
-        // Create heading for book title
-        var titleHeading = document.createElement('h3');
-        titleHeading.innerText = book.bookname.toUpperCase();
-        bookDetails.appendChild(titleHeading);
-        // Create paragraph for book author
-        var authorParagraph = document.createElement('p');
-        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
-        authorParagraph.classList.add('author');
-        bookDetails.appendChild(authorParagraph);
-        // Create paragraph for book description (MY VIEWS)
-        var descParagraph = document.createElement('p');
-        descParagraph.innerText = book.desc;
-        descParagraph.classList.add('description');
-        bookDetails.appendChild(descParagraph);
-        bookBlock.appendChild(bookDetails);
+        // Create book name element
+        var bookName = document.createElement('h3');
+        bookName.innerText = book.bookname.toUpperCase();
+        bookBlock.appendChild(bookName);
         // Append the book block to the book list
         bookList.appendChild(bookBlock);
       });

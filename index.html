@@ -52,7 +52,8 @@
     .book-block {
       width: 48%;
       display: flex;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
       background-color: white;
       padding: 20px;
       border-radius: 8px;
@@ -61,12 +62,14 @@
     }
     .book-image {
       width: 200px;
-      margin-right: 20px;
+      margin-bottom: 20px;
       border-radius: 4px;
     }
     .book-details {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
     h3 {
       text-transform: uppercase;
@@ -77,12 +80,13 @@
       color: #777;
       margin: 0;
       font-style: italic;
-      text-align: left;
+      text-align: center;
     }
     .description {
       font-size: 14px;
       margin: 0;
       margin-top: 10px;
+      font-style: italic;
     }
   </style>
 </head>
@@ -119,7 +123,7 @@
       appId: "1:507397179326:web:4c2369079020f5f7a49bef",
       measurementId: "G-CQ9CENNL89"
     };
-    firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
     // Get a reference to the database service
     var database = firebase.database();
     var booksRef = database.ref('books');
@@ -155,7 +159,7 @@
         bookDetails.appendChild(authorParagraph);
         // Create paragraph for book description (MY VIEWS)
         var descParagraph = document.createElement('p');
-        descParagraph.innerText =  '<em>' +  book.desc + '</em>';
+        descParagraph.innerText = book.desc;
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
         bookBlock.appendChild(bookDetails);
@@ -166,3 +170,4 @@
   </script>
 </body>
 </html>
+

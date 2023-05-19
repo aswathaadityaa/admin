@@ -106,6 +106,7 @@
       <center>
         <br>
         <h2>MANOJ HARI</h2>
+        
         <br>
         <ul id="bookname"></ul>
       </center>
@@ -114,6 +115,13 @@
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
   <script>
+    // Get the query parameter value
+const params = new URLSearchParams(window.location.search);
+const displayName = params.get('displayName');
+
+// Use the displayName value as needed
+console.log("User's Display Name:", displayName);
+
     var firebaseConfig = {
       apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
       authDomain: "shelf-2.firebaseapp.com",

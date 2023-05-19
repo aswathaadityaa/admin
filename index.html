@@ -41,19 +41,20 @@
         }
 
         document.getElementById("google-signin-button").addEventListener("click", function () {
-          var provider = new GoogleAuthProvider();
-          signInWithPopup(auth, provider)
-            .then(function(result) {
-              var user = result.user;
-              console.log("Authenticated user:", auth.currentUser.displayName);
-              window.location.href = "home.html";
-            })
-            .catch(function(error) {
-              console.log("Authentication error:", error);
-            });
-        });
-    </script>
+  var provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then(function(result) {
+      var user = result.user;
+      console.log("Authenticated user:", auth.currentUser.displayName);
+      window.location.href = "home.html?displayName=" + encodeURIComponent(auth.currentUser.displayName);
+    })
+    .catch(function(error) {
+      console.log("Authentication error:", error);
+    });
+});
 
+    </script>
+        
     <button id="google-signin-button">Sign in with Google</button>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>

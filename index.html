@@ -77,7 +77,6 @@ h1 {
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithCredential } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
         import { signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
-
    const firebaseConfig = {
   apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
   authDomain: "shelf-2.firebaseapp.com",
@@ -91,13 +90,10 @@ h1 {
       
         const app = initializeApp(firebaseConfig);
         const auth = getAuth();
-
         function onSignIn(googleUser) {
           var profile = googleUser.getBasicProfile();
           var idToken = googleUser.getAuthResponse().id_token;
-
           var credential = GoogleAuthProvider.credential(idToken);
-
           signInWithCredential(auth, credential)
             .then(function (result) {
               var user = result.user;
@@ -107,7 +103,6 @@ h1 {
               console.log("Authentication error:", error);
             });
         }
-
         document.getElementById("google-signin-button").addEventListener("click", function () {
   var provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
@@ -120,12 +115,10 @@ h1 {
       console.log("Authentication error:", error);
     });
 });
-
     </script>
         
     <button id="google-signin-button">Sign in with Google</button>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-
 </body>
 </html>
+

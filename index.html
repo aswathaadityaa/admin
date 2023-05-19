@@ -12,7 +12,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 400px;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 button {
@@ -45,26 +52,16 @@ h1 {
   margin-bottom: 24px;
 }
 
-img {
-  width: 300px;
-  height: 250px;
-  border-radius: 50%;
-  margin-bottom: 24px;
-}
+ img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin-bottom: 24px;
+    }
 
-/* Media queries */
 @media (max-width: 768px) {
-  body {
-    flex-direction: column;
-  }
-
-  img {
-    margin-bottom: 12px;
-  }
-
-  button {
-    font-size: 14px;
-    padding: 10px 20px;
+  .container {
+    max-width: 100%;
   }
 }
 

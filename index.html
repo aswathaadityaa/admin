@@ -59,7 +59,7 @@
     .book-block {
       width: 48%;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       background-color: white;
       padding: 20px;
       border-radius: 8px;
@@ -88,6 +88,7 @@
       color: #777;
       margin: 0;
       font-style: italic;
+      text-align: left;
     }
 
     .description {
@@ -122,20 +123,18 @@
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
   <script>
-var firebaseConfig = {
-        apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
-        authDomain: "shelf-2.firebaseapp.com",
-        databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
-        projectId: "shelf-2",
-        storageBucket: "shelf-2.appspot.com",
-        messagingSenderId: "507397179326",
-        appId: "1:507397179326:web:4c2369079020f5f7a49bef",
-        measurementId: "G-CQ9CENNL89"
-  };
-  
- 
-   
-       firebase.initializeApp(firebaseConfig);
+    var firebaseConfig = {
+      apiKey: " "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk"",
+      authDomain: "shelf-2.firebaseapp.com",
+      databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
+      projectId: "shelf-2",
+      storageBucket: "shelf-2.appspot.com",
+      messagingSenderId: "507397179326",
+      appId: "1:507397179326:web:4c2369079020f5f7a49bef",
+      measurementId: "G-CQ9CENNL89"
+    };
+
+    firebase.initializeApp(firebaseConfig);
 
     // Get a reference to the database service
     var database = firebase.database();
@@ -170,13 +169,13 @@ var firebaseConfig = {
 
         // Create paragraph for book author
         var authorParagraph = document.createElement('p');
-        authorParagraph.innerHTML = '<em>by ' + book.author + '</em>';
+        authorParagraph.innerHTML = '<em>' + book.author + '</em>';
         authorParagraph.classList.add('author');
         bookDetails.appendChild(authorParagraph);
 
-        // Create paragraph for book description
+        // Create paragraph for book description (MY VIEWS)
         var descParagraph = document.createElement('p');
-        descParagraph.innerText = book.desc;
+        descParagraph.innerText = 'MY VIEWS: ' + book.desc;
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
 

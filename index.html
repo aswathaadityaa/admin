@@ -53,13 +53,13 @@
       padding: 0;
       display: flex;
       flex-wrap: wrap;
-      
+      justify-content: space-between;
     }
 
     .book-block {
-      width: 48%;
+      width: 100%;
       display: flex;
-      align-items: flex-start;
+      flex-wrap: wrap;
       background-color: white;
       padding: 20px;
       border-radius: 8px;
@@ -68,7 +68,8 @@
     }
 
     .book-image {
-      width: 200px;
+      width: 100%;
+      max-width: 200px;
       margin-right: 20px;
       border-radius: 4px;
     }
@@ -95,6 +96,17 @@
       font-size: 14px;
       margin: 0;
       margin-top: 10px;
+    }
+
+    /* Responsive styles */
+    @media (min-width: 768px) {
+      .book-block {
+        width: 48%;
+      }
+
+      .book-image {
+        max-width: 100%;
+      }
     }
   </style>
 </head>

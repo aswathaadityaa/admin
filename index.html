@@ -13,97 +13,78 @@
       padding: 0;
       background-color: #f2f2f2;
     }
-
     header {
       background-color: #333;
       padding: 20px;
       color: white;
     }
-
     h1 {
       margin: 0;
     }
-
     nav ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
     }
-
     nav ul li {
       display: inline-block;
       margin-right: 10px;
     }
-
     nav ul li a {
       color: white;
       text-decoration: none;
     }
-
     main {
       padding: 20px;
     }
-
     h2 {
       text-align: center;
     }
-
     #bookname {
       list-style-type: none;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+
     }
 
     .book-block {
-      width: 100%;
+      width: 48%;
       display: flex;
-      flex-wrap: wrap;
+      align-items: flex-start;
       background-color: white;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
     }
-
     .book-image {
-      max-width: 100%;
-      height: auto;
+      width: 200px;
+      margin-right: 20px;
       border-radius: 4px;
     }
-
     .book-details {
       display: flex;
       flex-direction: column;
     }
-
     h3 {
       text-transform: uppercase;
       margin: 0;
       margin-bottom: 10px;
     }
-
     .author {
       color: #777;
       margin: 0;
       font-style: italic;
       text-align: left;
     }
-
     .description {
       font-size: 14px;
       margin: 0;
       margin-top: 10px;
     }
-
-    /* Responsive styles */
-    @media (min-width: 768px) {
-      .book-block {
-        width: 48%;
-      }
-    }
-</style>
+  </style>
 </head>
 <body>
   <header>
@@ -115,7 +96,6 @@
       </ul>
     </nav>
   </header>
-
   <main>
     <section id="books">
       <center>
@@ -126,7 +106,6 @@
       </center>
     </section>
   </main>
-
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
   <script>
@@ -140,9 +119,7 @@
       appId: "1:507397179326:web:4c2369079020f5f7a49bef",
       measurementId: "G-CQ9CENNL89"
     };
-
     firebase.initializeApp(firebaseConfig);
-
     // Get a reference to the database service
     var database = firebase.database();
     var booksRef = database.ref('books');
@@ -164,30 +141,24 @@
         bookImage.alt = book.bookname; // Set the alt attribute to the book name
         bookImage.classList.add('book-image');
         bookBlock.appendChild(bookImage);
-
         // Create book details element
         var bookDetails = document.createElement('div');
         bookDetails.classList.add('book-details');
-
         // Create heading for book title
         var titleHeading = document.createElement('h3');
         titleHeading.innerText = book.bookname.toUpperCase();
         bookDetails.appendChild(titleHeading);
-
         // Create paragraph for book author
         var authorParagraph = document.createElement('p');
         authorParagraph.innerHTML = '<em>' + book.author + '</em>';
         authorParagraph.classList.add('author');
         bookDetails.appendChild(authorParagraph);
-
         // Create paragraph for book description (MY VIEWS)
         var descParagraph = document.createElement('p');
         descParagraph.innerText = 'MY VIEWS: ' + book.desc;
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
-
         bookBlock.appendChild(bookDetails);
-
         // Append the book block to the book list
         bookList.appendChild(bookBlock);
       });

@@ -154,8 +154,8 @@
         bookDetails.appendChild(authorParagraph);
         // Create paragraph for book description (MY VIEWS)
         var descParagraph = document.createElement('p');
-        descParagraph.innerText =  '<em>' +  book.desc + '<em>';
-        descParagraph.innerText =  '<em>' +  book.desc + '</em>';
+        descParagraph.innerText = book.desc ;
+       
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
         bookBlock.appendChild(bookDetails);

@@ -51,9 +51,13 @@
     #bookname {
       list-style-type: none;
       padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
     }
 
     .book-block {
+      width: 48%;
       display: flex;
       align-items: center;
       background-color: white;
@@ -131,7 +135,7 @@ var firebaseConfig = {
   
  
    
-     firebase.initializeApp(firebaseConfig);
+       firebase.initializeApp(firebaseConfig);
 
     // Get a reference to the database service
     var database = firebase.database();

@@ -7,15 +7,66 @@
   <title>Document</title>
   <style>
     /* Add custom CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px;
+      color: white;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    #bookname {
+      list-style-type: none;
+      padding: 0;
+    }
+
     .book-block {
       display: flex;
       align-items: center;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
     }
 
     .book-image {
       width: 200px;
       margin-right: 20px;
+      border-radius: 4px;
     }
 
     .book-details {
@@ -24,14 +75,19 @@
 
     h3 {
       text-transform: uppercase;
+      margin: 0;
+      margin-bottom: 10px;
     }
 
     .author {
-      color: lightgrey;
+      color: #777;
+      margin: 0;
     }
 
     .description {
       font-size: 14px;
+      margin: 0;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -52,12 +108,7 @@
         <br>
         <h2>MANOJ HARI</h2>
         <br>
-        <ul>
-          <li>
-            <ul id="bookname"></ul>
-            <br>
-          </li>
-        </ul>
+        <ul id="bookname"></ul>
       </center>
     </section>
   </main>
@@ -76,35 +127,32 @@ var firebaseConfig = {
         measurementId: "G-CQ9CENNL89"
   };
   
-  firebase.initializeApp(firebaseConfig);
+ 
+    firebase.initializeApp(firebaseConfig);
 
     // Get a reference to the database service
     var database = firebase.database();
     var booksRef = database.ref('books');
-
     // Listen for changes in the data
-    booksRef.on('value', function (snapshot) {
+    booksRef.on('value', function(snapshot) {
       // Clear the book list
       var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
-
       // Loop through the books in the snapshot
-      snapshot.forEach(function (childSnapshot) {
+      snapshot.forEach(function(childSnapshot) {
         // Get the data for the book
         var book = childSnapshot.val();
-
         // Create a book block element
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
-
-        // Create an image element for the book image
+        // Create book image element
         var bookImage = document.createElement('img');
-        bookImage.src = book.imgurl;
-        bookImage.alt = book.bookname;
+        bookImage.src = book.imgurl; // Set the image source to the imgurl
+        bookImage.alt = book.bookname; // Set the alt attribute to the book name
         bookImage.classList.add('book-image');
         bookBlock.appendChild(bookImage);
 
-        // Create a div for book details
+        // Create book details element
         var bookDetails = document.createElement('div');
         bookDetails.classList.add('book-details');
 

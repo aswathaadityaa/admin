@@ -7,198 +7,198 @@
   <title>Document</title>
   <style>
     /* Add custom CSS styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f2f2f2;
-    }
-    header {
-      background-color: #333;
-      padding: 20px;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    h1 {
-      margin: 0;
-    }
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    nav ul li {
-      margin-right: 10px;
-    }
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-    }
-    main {
-      padding: 20px;
-    }
-    h2 {
-      text-align: center;
-      font-size: 60%;
-      text-align: end;
-    }
-    #bookname {
-      list-style-type: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-    .book-block {
-      width: 100%;
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-    }
-    .book-image {
-      width: 200px;
-      margin-bottom: 30px;
-      border-radius: 4px;
-      height: 300px;
-      width: 200px;
-    }
-    .book-details {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    h3 {
-      text-transform: uppercase;
-      margin: 0;
-      left : 0 ;
-      margin-bottom: 10px;
-    }
-    .author {
-      color: #777;
-      margin: 0;
-      font-style: italic;
-    }
-    .description {
-      font-size: 14px;
-      margin: 0;
-      margin-top: 10px;
-      text-align: justify;
-      font-family: system-ui;
-    }
-    #reviewForm {
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-      width: 300px;
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    #reviewForm input,
-    #reviewForm textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      resize: none;
-    }
-    #reviewForm textarea {
-      height: 100px;
-    }
-    #reviewForm button {
-      width: 100%;
-      padding: 10px;
-      background-color: #333;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    
-    .sidepanel  {
-         width: 0;
-    position: fixed;
-    z-index: 1;
-    height: 250px;
-       bottom: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-    }
-    @media (max-width: 768px) {
-  .sidepanel  {
+    /* Add custom CSS styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+header {
+  background-color: #333;
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+nav ul li {
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 60%;
+  text-align: end;
+}
+
+#bookname {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.book-block {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.book-image {
+  width: 200px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  height: 300px;
+  width: 200px;
+}
+
+.book-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h3 {
+  text-transform: uppercase;
+  margin: 0;
+  left: 0;
+  margin-bottom: 10px;
+}
+
+.author {
+  color: #777;
+  margin: 0;
+  font-style: italic;
+}
+
+.description {
+  font-size: 14px;
+  margin: 0;
+  margin-top: 10px;
+  text-align: justify;
+  font-family: system-ui;
+}
+
+#reviewForm {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 300px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#reviewForm input,
+#reviewForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+#reviewForm textarea {
+  height: 100px;
+}
+
+#reviewForm button {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sidepanel {
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  height: 250px;
+  bottom: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  display: flex;
+  padding: 10px 15px;
+  border: none;
+  position: relative;
+  bottom: -50%;
+  left: 0;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  header {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 40%;
+  }
+
+  .book-image {
+    height: 200px;
+    width: 150px;
+  }
+
+  .sidepanel {
     width: 100%;
-    position: fixed;
-    z-index: 1;
-    height: 250px;
-    bottom: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+    height: auto;
+    padding-top: 20px;
   }
 }
-This c
-    .sidepanel a {
-      padding: 8px 8px 8px 32px;
-      text-decoration: none;
-      font-size: 25px;
-      color: #818181;
-      display: block;
-      transition: 0.3s;
-    }
-    
-    .sidepanel a:hover {
-      color: #f1f1f1;
-    }
-    
-    .sidepanel .closebtn {
-      position: absolute;
-      top: 0;
-      right: 25px;
-      font-size: 36px;
-    }
-    
-    .openbtn {
-          font-size: 20px;
-    cursor: pointer;
-    background-color: #111;
-    color: white;
-      display : flex;
-    padding: 10px 15px;
-    border: none;
-    position: relative;
-    bottom: -50%;
-    left: 0;
-    }
-    
-    .openbtn:hover {
-      background-color: #444;
-    }
-    
-    /* Media Query for smaller screens */
-    @media (max-width: 768px) {
-      .openbtn {
-        top: 20px;
-        left: 10px;
-      }
-    }
-   
+
   </style>
 </head>
 <body>

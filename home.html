@@ -150,15 +150,23 @@ var firebaseConfig = {
       snapshot.forEach(function(childSnapshot) {
         // Get the data for the book
         var book = childSnapshot.val();
+        
         // Create a book block element
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
+        
         // Create book image element
+         var booktype = document.createElement('p');
+        booktype.innerHTML = '<em>'+ 'by ' + book.booktype + '</em>';
+        booktype.classList.add('booktype');
+        booktype.appendChild(booktype);
+        
         var bookImage = document.createElement('img');
         bookImage.src = book.imgurl; // Set the image source to the imgurl
         bookImage.alt = book.bookname; // Set the alt attribute to the book name
         bookImage.classList.add('book-image');
         bookBlock.appendChild(bookImage);
+        
         // Create book details element
         var bookDetails = document.createElement('div');
         bookDetails.classList.add('book-details');

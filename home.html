@@ -7,195 +7,209 @@
   <title>Document</title>
   <style>
     /* Add custom CSS styles */
-    /* Add custom CSS styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f2f2f2;
-}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    header {
+      background-color: #333;
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav ul li {
+      margin-right: 10px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    main {
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 60%;
+      text-align: end;
+    }
+    #bookname {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .book-block {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .book-image {
+      width: 200px;
+      margin-bottom: 30px;
+      border-radius: 4px;
+      height: 300px;
+      width: 200px;
+    }
+    .book-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h3 {
+      text-transform: uppercase;
+      margin: 0;
+      left : 0 ;
+      margin-bottom: 10px;
+    }
+    .author {
+      color: #777;
+      margin: 0;
+      font-style: italic;
+    }
+    .description {
+      font-size: 14px;
+      margin: 0;
+      margin-top: 10px;
+      text-align: justify;
+      font-family: system-ui;
+    }
+    #reviewForm {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      width: 300px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    #reviewForm input,
+    #reviewForm textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: none;
+    }
+    #reviewForm textarea {
+      height: 100px;
+    }
+    #reviewForm button {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .sidepanel  {
+         width: 0;
+    position: fixed;
+    z-index: 1;
+    height: 250px;
+       bottom: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    }
 
-header {
-  background-color: #333;
-  padding: 20px;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-h1 {
-  margin: 0;
-}
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-nav ul li {
-  margin-right: 10px;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-}
-
-main {
-  padding: 20px;
-}
-
-h2 {
-  text-align: center;
-  font-size: 60%;
-  text-align: end;
-}
-
-#bookname {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.book-block {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
-.book-image {
-  width: 200px;
-  margin-bottom: 30px;
-  border-radius: 4px;
-  height: 300px;
-  width: 200px;
-}
-
-.book-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-h3 {
-  text-transform: uppercase;
-  margin: 0;
-  left: 0;
-  margin-bottom: 10px;
-}
-
-.author {
-  color: #777;
-  margin: 0;
-  font-style: italic;
-}
-
-.description {
-  font-size: 14px;
-  margin: 0;
-  margin-top: 10px;
-  text-align: justify;
-  font-family: system-ui;
-}
-
-#reviewForm {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  width: 300px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#reviewForm input,
-#reviewForm textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: none;
-}
-
-#reviewForm textarea {
-  height: 100px;
-}
-
-#reviewForm button {
-  width: 100%;
-  padding: 10px;
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.sidepanel {
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  height: 250px;
-  bottom: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  display: flex;
-  padding: 10px 15px;
-  border: none;
-  position: relative;
-  bottom: -50%;
-  left: 0;
-}
-
-.openbtn:hover {
-  background-color: #444;
-}
-
-/* Media Query for smaller screens */
-@media (max-width: 768px) {
-  header {
-    padding: 10px;
-  }
-
-  h2 {
-    font-size: 40%;
-  }
-
-  .book-image {
-    height: 200px;
-    width: 150px;
-  }
-
-  .sidepanel {
+    @media (max-width: 768px) {
+  .sidepanel  {
     width: 100%;
-    height: auto;
-    padding-top: 20px;
+    position: fixed;
+    z-index: 1;
+    height: 250px;
+    bottom: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+}
+This c
+    .sidepanel a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+    
+    .sidepanel a:hover {
+      color: #f1f1f1;
+    }
+    
+    .sidepanel .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+    }
+    
+    .openbtn {
+          font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+      display : flex;
+    padding: 10px 15px;
+    border: none;
+    position: relative;
+    bottom: -50%;
+    left: 0;
+    }
+    
+    .openbtn:hover {
+      background-color: #444;
+    }
+    
+    /* Media Query for smaller screens */
+    @media (max-width: 768px) {
+      .openbtn {
+        top: 20px;
+        left: 10px;
+      }
+    }
+    @media only screen and (max-width: 600px) {
+  .sidepanel  {
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    height: 250px;
+    bottom: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
   }
 }
 
@@ -204,7 +218,6 @@ h3 {
 <body>
   <header>
     <h1>SHELF 2.0</h1>
-
     <h2 id="myprofile"></h2>
   </header>
   <main>
@@ -234,10 +247,8 @@ h3 {
     // Get the query parameter value
     const params = new URLSearchParams(window.location.search);
     const displayName = params.get('displayName');
-
     // Use the displayName value as needed
     document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' + displayName;
-
 var firebaseConfig = {
       apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
       authDomain: "shelf-2.firebaseapp.com",
@@ -249,61 +260,49 @@ var firebaseConfig = {
       measurementId: "G-CQ9CENNL89"
     };
     firebase.initializeApp(firebaseConfig);
-
     // Get a reference to the database service
     var database = firebase.database();
     var booksRef = database.ref('books');
-
     // Listen for changes in the data
     booksRef.on('value', function(snapshot) {
       // Clear the book list
       var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
-
       // Loop through the books in the snapshot
       snapshot.forEach(function(childSnapshot) {
         // Get the data for the book
         var book = childSnapshot.val();
-
         // Create a book block element
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
-
         // Create book image element
         var bookImage = document.createElement('img');
         bookImage.src = book.imgurl; // Set the image source to the imgurl
         bookImage.alt = book.bookname; // Set the alt attribute to the book name
         bookImage.classList.add('book-image');
         bookBlock.appendChild(bookImage);
-
         // Create book details element
         var bookDetails = document.createElement('div');
         bookDetails.classList.add('book-details');
-
         // Create heading for book title
         var titleHeading = document.createElement('h3');
         titleHeading.innerText = book.bookname.toUpperCase();
         bookDetails.appendChild(titleHeading);
-
         // Create paragraph for book author
         var authorParagraph = document.createElement('p');
         authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
         authorParagraph.classList.add('author');
         bookDetails.appendChild(authorParagraph);
-
         // Create paragraph for book description (MY VIEWS)
         var descParagraph = document.createElement('p');
         descParagraph.innerText = book.desc;
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
-
         bookBlock.appendChild(bookDetails);
-
         // Append the book block to the book list
         bookList.appendChild(bookBlock);
       });
     });
-
     // Check if a user is already logged in
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -317,14 +316,11 @@ var firebaseConfig = {
         // No user is signed in
       }
     });
-
     // Handle form submission
     document.getElementById('reviewForm').addEventListener('submit', function(e) {
       e.preventDefault();
-
       var reviewInput = document.getElementById('reviewInput').value;
       var currentUser = firebase.auth().currentUser;
-
       if (currentUser && reviewInput) {
         // Store the review in the Firebase Realtime Database
         var reviewsRef = database.ref('reviews');
@@ -333,10 +329,8 @@ var firebaseConfig = {
           name: currentUser.displayName,
           review: reviewInput
         });
-
         // Clear the form
         document.getElementById('reviewInput').value = '';
-
         // Optional: Display a success message to the user
         alert('Review submitted successfully!');
       } else {
@@ -349,7 +343,6 @@ var firebaseConfig = {
     function openNav() {
   document.getElementById("mySidepanel").style.width = "20%";
 }
-
 function closeNav() {
   document.getElementById("mySidepanel").style.width = "0";
 }

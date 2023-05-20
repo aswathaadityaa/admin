@@ -170,8 +170,7 @@ var firebaseConfig = {
         
         
         var titleHeading = document.createElement('h3');
-       titleHeading.innerText = book.bookname.toUpperCase() + " A " +book.booktype.toUpperCase() ;
-      titleHeading.innerText = titleHeading.innerText.replace(/A/g, 'a');
+    titleHeading.innerText = book.bookname.toUpperCase() + " a " +book.booktype.toUpperCase() ;
         bookDetails.appendChild(titleHeading);  
         var booktype = document.createElement('p');
         booktype.innerHTML = "<em>" +  book.booktype.toUpperCase() + "<em>";

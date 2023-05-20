@@ -97,6 +97,9 @@
       font-family: system-ui;
     }
   
+    .booktype{
+    right : 0;
+    }
   </style>
 </head>
 <body>
@@ -143,15 +146,16 @@ var firebaseConfig = {
     var booksRef = database.ref('books');
     // Listen for changes in the data
     booksRef.on('value', function(snapshot) {
-      // Clear the book list
+    
       var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
-      // Loop through the books in the snapshot
+      
+      
       snapshot.forEach(function(childSnapshot) {
-        // Get the data for the book
-        var book = childSnapshot.val();
         
-        // Create a book block element
+        var book = childSnapshot.val();
+      
+        
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
         
@@ -166,25 +170,32 @@ var firebaseConfig = {
         bookImage.classList.add('book-image');
         bookBlock.appendChild(bookImage);
         
-        // Create book details element
+        
         var bookDetails = document.createElement('div');
         bookDetails.classList.add('book-details');
-        // Create heading for book title
+        
+        
+        
         var titleHeading = document.createElement('h3');
         titleHeading.innerText = book.bookname.toUpperCase();
         bookDetails.appendChild(titleHeading);
-        // Create paragraph for book author
+    
+        
+        
         var authorParagraph = document.createElement('p');
         authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
         authorParagraph.classList.add('author');
         bookDetails.appendChild(authorParagraph);
-        // Create paragraph for book description (MY VIEWS)
+      
+        
+        
         var descParagraph = document.createElement('p');
         descParagraph.innerText = book.desc;
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
         bookBlock.appendChild(bookDetails);
-        // Append the book block to the book list
+       
+        
         bookList.appendChild(bookBlock);
       });
     });

@@ -159,7 +159,7 @@ var firebaseConfig = {
          var booktype = document.createElement('p');
         booktype.innerHTML =  book.booktype ;
         booktype.classList.add('booktype');
-        booktype.appendParent(booktype);
+        bookBlock.appendChild(booktype);
         
         var bookImage = document.createElement('img');
         bookImage.src = book.imgurl; // Set the image source to the imgurl

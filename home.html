@@ -157,7 +157,7 @@ var firebaseConfig = {
         
      
          var booktype = document.createElement('p');
-        booktype.innerHTML = "<em>" +  book.booktype +"<em>";
+        booktype.innerHTML = "<em>" +  book.booktype.toUpperCase() +"<em>";
         booktype.classList.add('booktype');
         bookBlock.appendChild(booktype);
         
@@ -176,7 +176,7 @@ var firebaseConfig = {
         bookDetails.appendChild(titleHeading);
         // Create paragraph for book author
         var authorParagraph = document.createElement('p');
-        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author.toUpperCase() + '</em>';
+        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
         authorParagraph.classList.add('author');
         bookDetails.appendChild(authorParagraph);
         // Create paragraph for book description (MY VIEWS)

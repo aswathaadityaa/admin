@@ -176,7 +176,7 @@ var firebaseConfig = {
         bookDetails.appendChild(titleHeading);
         // Create paragraph for book author
         var authorParagraph = document.createElement('p');
-        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author.toUpperCase + '</em>';
+        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author.toUpperCase() + '</em>';
         authorParagraph.classList.add('author');
         bookDetails.appendChild(authorParagraph);
         // Create paragraph for book description (MY VIEWS)

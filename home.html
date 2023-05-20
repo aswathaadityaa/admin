@@ -247,45 +247,6 @@ var firebaseConfig = {
         alert('Please fill in all the fields.');
       }
     });
-    // Get the necessary elements
-const likeButton = document.getElementById('likeDislikeButtons');
-const likeBtn = document.getElementById('likeBtn');
-const dislikeBtn = document.getElementById('dislikeBtn');
-const likeCount = document.getElementById('likeCount');
-const dislikeCount = document.getElementById('dislikeCount');
-
-// Initialize the counters
-let likeCounter = 0;
-let dislikeCounter = 0;
-
-// Attach event listeners to the like and dislike buttons
-likeBtn.addEventListener('click', () => {
-  // Increment the like counter
-  likeCounter++;
-
-  // Update the like count text
-  likeCount.textContent = likeCounter;
-
-  // Disable the like button after it is clicked (optional)
-  likeBtn.disabled = true;
-
-  // Enable the dislike button in case it was disabled
-  dislikeBtn.disabled = false;
-});
-
-dislikeBtn.addEventListener('click', () => {
-  // Increment the dislike counter
-  dislikeCounter++;
-
-  // Update the dislike count text
-  dislikeCount.textContent = dislikeCounter;
-
-  // Disable the dislike button after it is clicked (optional)
-  dislikeBtn.disabled = true;
-
-  // Enable the like button in case it was disabled
-  likeBtn.disabled = false;
-});
 
   </script>
 </body>

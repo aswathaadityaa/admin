@@ -70,14 +70,13 @@
       width: 200px;
       margin-bottom: 30px;
       border-radius: 4px;
-      height : 300px;
-      width : 200px;
+      height: 300px;
+      width: 200px;
     }
     .book-details {
       display: flex;
       flex-direction: column;
       align-items: center;
-   
     }
     h3 {
       text-transform: uppercase;
@@ -89,15 +88,44 @@
       margin: 0;
       font-style: italic;
     }
-
-  
     .description {
       font-size: 14px;
       margin: 0;
       margin-top: 10px;
       text-align: justify;
       font-family: system-ui;
-
+    }
+    #reviewForm {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      width: 300px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    #reviewForm input,
+    #reviewForm textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+    #reviewForm textarea {
+      height: 100px;
+    }
+    #reviewForm button {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -111,24 +139,25 @@
       <center>
         <br>
         <h3>MANOJ HARI</h3>
-        
-        
         <br>
         <ul id="bookname"></ul>
       </center>
     </section>
   </main>
+  <form id="reviewForm">
+    <textarea id="reviewInput" placeholder="Write your review" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
   <script>
     // Get the query parameter value
-const params = new URLSearchParams(window.location.search);
-const displayName = params.get('displayName');
-
-// Use the displayName value as needed
-
-document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' +  displayName;
-    var firebaseConfig = {
+    const params = new URLSearchParams(window.location.search);
+    const displayName = params.get('displayName');
+    // Use the displayName value as needed
+    document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' + displayName;
+var firebaseConfig = {
       apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
       authDomain: "shelf-2.firebaseapp.com",
       databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
@@ -174,18 +203,98 @@ document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' +  displayN
         bookDetails.appendChild(authorParagraph);
         // Create paragraph for book description (MY VIEWS)
         var descParagraph = document.createElement('p');
-        descParagraph.innerText = book.desc ;
-
         descParagraph.innerText = book.desc;
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
+
         bookBlock.appendChild(bookDetails);
+
         // Append the book block to the book list
         bookList.appendChild(bookBlock);
+        <div id="likeDislikeButtons">
+  <button id="likeBtn">Like</button>
+  <button id="dislikeBtn">Dislike</button>
+  <span id="likeCount">0</span>
+  <span id="dislikeCount">0</span>
+</div>
+
       });
     });
-    
-    
+    // Check if a user is already logged in
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in
+        var currentUser = firebase.auth().currentUser;
+        if (currentUser && currentUser.displayName) {
+          // Set the display name in the comment form
+          document.getElementById('nameInput').value = currentUser.displayName;
+        }
+      } else {
+        // No user is signed in
+      }
+    });
+    // Handle form submission
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var reviewInput = document.getElementById('reviewInput').value;
+      var currentUser = firebase.auth().currentUser;
+      if (currentUser && reviewInput) {
+        // Store the review in the Firebase Realtime Database
+        var reviewsRef = database.ref('reviews');
+        var newReviewRef = reviewsRef.push();
+        newReviewRef.set({
+          name: currentUser.displayName,
+          review: reviewInput
+        });
+        // Clear the form
+        document.getElementById('reviewInput').value = '';
+        // Optional: Display a success message to the user
+        alert('Review submitted successfully!');
+      } else {
+        // Optional: Display an error message to the user
+        alert('Please fill in all the fields.');
+      }
+    });
+    // Get the necessary elements
+const likeButton = document.getElementById('likeDislikeButtons');
+const likeBtn = document.getElementById('likeBtn');
+const dislikeBtn = document.getElementById('dislikeBtn');
+const likeCount = document.getElementById('likeCount');
+const dislikeCount = document.getElementById('dislikeCount');
+
+// Initialize the counters
+let likeCounter = 0;
+let dislikeCounter = 0;
+
+// Attach event listeners to the like and dislike buttons
+likeBtn.addEventListener('click', () => {
+  // Increment the like counter
+  likeCounter++;
+
+  // Update the like count text
+  likeCount.textContent = likeCounter;
+
+  // Disable the like button after it is clicked (optional)
+  likeBtn.disabled = true;
+
+  // Enable the dislike button in case it was disabled
+  dislikeBtn.disabled = false;
+});
+
+dislikeBtn.addEventListener('click', () => {
+  // Increment the dislike counter
+  dislikeCounter++;
+
+  // Update the dislike count text
+  dislikeCount.textContent = dislikeCounter;
+
+  // Disable the dislike button after it is clicked (optional)
+  dislikeBtn.disabled = true;
+
+  // Enable the like button in case it was disabled
+  likeBtn.disabled = false;
+});
+
   </script>
 </body>
 </html>

@@ -155,9 +155,9 @@ var firebaseConfig = {
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
         
-        // Create book image element
+     
          var booktype = document.createElement('p');
-        booktype.innerHTML =  book.booktype ;
+        booktype.innerHTML = "<em>" +  book.booktype +"<em>";
         booktype.classList.add('booktype');
         bookBlock.appendChild(booktype);
         

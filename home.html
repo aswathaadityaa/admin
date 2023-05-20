@@ -126,6 +126,52 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+
+.sidepanel  {
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  height: 250px;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color:#444;
+}
     }
   </style>
 </head>
@@ -144,10 +190,15 @@
       </center>
     </section>
   </main>
-  <form id="reviewForm">
+  <div id="mySidepanel" class="sidepanel">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+ <form id="reviewForm">
     <textarea id="reviewInput" placeholder="Write your review" required></textarea>
     <button type="submit">Submit</button>
   </form>
+</div>
+<button class="openbtn" onclick="openNav()">☰ Toggle Sidepanel</button> 
+  
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
@@ -265,6 +316,15 @@ var firebaseConfig = {
         alert('Please fill in all the fields.');
       }
     });
+    
+    
+    function openNav() {
+  document.getElementById("mySidepanel").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidepanel").style.width = "0";
+}
   </script>
 </body>
 </html>

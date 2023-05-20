@@ -140,7 +140,20 @@
     transition: 0.5s;
     padding-top: 60px;
     }
-    
+    @media (max-width: 768px) {
+  .sidepanel  {
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    height: 250px;
+    bottom: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+}
+This c
     .sidepanel a {
       padding: 8px 8px 8px 32px;
       text-decoration: none;
@@ -185,19 +198,7 @@
         left: 10px;
       }
     }
-    @media only screen and (max-width: 600px) {
-  .sidepanel  {
-    width: 100%;
-    position: fixed;
-    z-index: 1;
-    height: 250px;
-    bottom: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
-}
+   
   </style>
 </head>
 <body>

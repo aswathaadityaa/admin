@@ -155,8 +155,10 @@
     // Get the query parameter value
     const params = new URLSearchParams(window.location.search);
     const displayName = params.get('displayName');
+
     // Use the displayName value as needed
     document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' + displayName;
+
 var firebaseConfig = {
       apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
       authDomain: "shelf-2.firebaseapp.com",
@@ -168,39 +170,48 @@ var firebaseConfig = {
       measurementId: "G-CQ9CENNL89"
     };
     firebase.initializeApp(firebaseConfig);
+
     // Get a reference to the database service
     var database = firebase.database();
     var booksRef = database.ref('books');
+
     // Listen for changes in the data
     booksRef.on('value', function(snapshot) {
       // Clear the book list
       var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
+
       // Loop through the books in the snapshot
       snapshot.forEach(function(childSnapshot) {
         // Get the data for the book
         var book = childSnapshot.val();
+
         // Create a book block element
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
+
         // Create book image element
         var bookImage = document.createElement('img');
         bookImage.src = book.imgurl; // Set the image source to the imgurl
         bookImage.alt = book.bookname; // Set the alt attribute to the book name
         bookImage.classList.add('book-image');
         bookBlock.appendChild(bookImage);
+
         // Create book details element
         var bookDetails = document.createElement('div');
         bookDetails.classList.add('book-details');
+
         // Create heading for book title
         var titleHeading = document.createElement('h3');
         titleHeading.innerText = book.bookname.toUpperCase();
         bookDetails.appendChild(titleHeading);
+
         // Create paragraph for book author
         var authorParagraph = document.createElement('p');
         authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
         authorParagraph.classList.add('author');
         bookDetails.appendChild(authorParagraph);
+
         // Create paragraph for book description (MY VIEWS)
         var descParagraph = document.createElement('p');
         descParagraph.innerText = book.desc;
@@ -209,9 +220,11 @@ var firebaseConfig = {
 
         bookBlock.appendChild(bookDetails);
 
-
+        // Append the book block to the book list
+        bookList.appendChild(bookBlock);
       });
     });
+
     // Check if a user is already logged in
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -225,11 +238,14 @@ var firebaseConfig = {
         // No user is signed in
       }
     });
+
     // Handle form submission
     document.getElementById('reviewForm').addEventListener('submit', function(e) {
       e.preventDefault();
+
       var reviewInput = document.getElementById('reviewInput').value;
       var currentUser = firebase.auth().currentUser;
+
       if (currentUser && reviewInput) {
         // Store the review in the Firebase Realtime Database
         var reviewsRef = database.ref('reviews');
@@ -238,8 +254,10 @@ var firebaseConfig = {
           name: currentUser.displayName,
           review: reviewInput
         });
+
         // Clear the form
         document.getElementById('reviewInput').value = '';
+
         // Optional: Display a success message to the user
         alert('Review submitted successfully!');
       } else {
@@ -247,7 +265,6 @@ var firebaseConfig = {
         alert('Please fill in all the fields.');
       }
     });
-
   </script>
 </body>
 </html>

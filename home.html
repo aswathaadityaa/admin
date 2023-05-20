@@ -156,11 +156,7 @@ var firebaseConfig = {
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
         
-     
-         var booktype = document.createElement('p');
-        booktype.innerHTML = "<em>" +  book.booktype.toUpperCase() + "<em>";
-        booktype.classList.add('booktype');
-        bookBlock.appendChild(booktype);
+   
         
         var bookImage = document.createElement('img');
         bookImage.src = book.imgurl; // Set the image source to the imgurl
@@ -174,8 +170,12 @@ var firebaseConfig = {
         
         
         var titleHeading = document.createElement('h3');
-        titleHeading.innerText = book.bookname.toUpperCase();
-        bookDetails.appendChild(titleHeading);
+        titleHeading.innerText = book.bookname.toUpperCase() + book.booktype.toUpperCase() ;
+        bookDetails.appendChild(titleHeading);  
+        var booktype = document.createElement('p');
+        booktype.innerHTML = "<em>" +  book.booktype.toUpperCase() + "<em>";
+        booktype.classList.add('booktype');
+        bookBlock.appendChild(booktype);
     
         
         

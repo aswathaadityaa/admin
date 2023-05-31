@@ -138,11 +138,11 @@ var firebaseConfig = {
     firebase.initializeApp(firebaseConfig);
     // Get a reference to the database service
     var database = firebase.database();
-    var booksRef = database.ref('books');
+    var booksRef = database.ref('adoptme');
     // Listen for changes in the data
     booksRef.on('value', function(snapshot) {
     
-      var bookList = document.getElementById('adoptme');
+      var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
       
       

@@ -168,7 +168,7 @@ var firebaseConfig = {
         
         
         var titleHeading = document.createElement('h3');
-    titleHeading.innerText = book.bookname.toUpperCase() + " a " +book.booktype.toUpperCase() ;
+    titleHeading.innerText = book.bookname.toUpperCase() ;
         bookDetails.appendChild(titleHeading);  
         var booktype = document.createElement('p');
         
@@ -177,10 +177,7 @@ var firebaseConfig = {
     
         
         
-        var authorParagraph = document.createElement('p');
-        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
-        authorParagraph.classList.add('author');
-        bookDetails.appendChild(authorParagraph);
+ 
       
         
         

@@ -159,15 +159,25 @@ var firebaseConfig = {
 booksRef.on('value', function(snapshot) {
   var bookList = document.getElementById('bookname');
   bookList.innerHTML = '';
-
   snapshot.forEach(function(childSnapshot) {
     var book = childSnapshot.val();
-
     var bookBlock = document.createElement('li');
     bookBlock.classList.add('book-block');
-
-    // ...
-
+    var titleHeading = document.createElement('h3');
+    titleHeading.innerHTML = `${book.bookname.toUpperCase()} (<span class="dog-gender">${book.gender}</span>)`;
+    bookBlock.appendChild(titleHeading);
+    var detailsParagraph = document.createElement('p');
+    detailsParagraph.innerHTML =
+       book.dogtype.toUpperCase() + '<br>' +
+      '<strong>About </strong> ' + book.desc ;
+    bookBlock.appendChild(detailsParagraph);
+    var showLocationButton = document.createElement('button');
+    showLocationButton.innerText = 'Location';
+    showLocationButton.classList.add('location-button');
+    showLocationButton.dataset.latitude = book.latitude;
+    showLocationButton.dataset.longitude = book.longitude;
+    showLocationButton.addEventListener('click', showLocation);
+    bookBlock.appendChild(showLocationButton);
     var acceptButton = document.createElement('button');
     acceptButton.innerText = 'Accept';
     acceptButton.classList.add('accept-button');

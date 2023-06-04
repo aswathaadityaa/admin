@@ -201,19 +201,35 @@ booksRef.on('value', function(snapshot) {
   });
 });
 function acceptDog(event) {
- var bookId = event.target.dataset.bookId;
+  var bookId = event.target.dataset.bookId;
+  var bookRef = database.ref('books/' + bookId);
 
-  // Update the accepted field of the corresponding book to true
-  database.ref('books/' + bookId).update({
-    accepted: true
-  }).then(function() {
-    // Change the display of the accept button to "Accepted" if the update is successful
-    event.target.innerText = "Accepted";
-    event.target.disabled = true;
-  }).catch(function(error) {
-    console.log("Error updating accepted field:", error);
+  // Check the value of the accepted field in the database
+  bookRef.once('value', function(snapshot) {
+    var accepted = snapshot.child('accepted').val();
+
+    if (accepted === true) {
+      // If the accepted field is already true, update the button display to "Accepted"
+      event.target.innerText = 'Accepted';
+      event.target.disabled = true;
+    } else {
+      // Update the accepted field in the database to true
+      bookRef.update({
+        accepted: true
+      }, function(error) {
+        if (error) {
+          // Handle the error
+          console.log('Error updating accepted field:', error);
+        } else {
+          // Update the button display to "Accepted"
+          event.target.innerText = 'Accepted';
+          event.target.disabled = true;
+        }
+      });
+    }
   });
 }
+
 function showLocation(event) {
   var latitude = parseFloat(event.target.dataset.latitude);
   var longitude = parseFloat(event.target.dataset.longitude);

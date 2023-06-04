@@ -160,10 +160,7 @@ var firebaseConfig = {
         
    
         
-        var bookImage = document.createElement('img');
-        bookImage.src = book.imgurl; // Set the image source to the imgurl
-        bookImage.classList.add('book-image');
-        bookBlock.appendChild(bookImage);
+       
         
         
         var bookDetails = document.createElement('div');
@@ -180,8 +177,7 @@ var firebaseConfig = {
         var booktype = document.createElement('p');
         
 
-        booktype.classList.add('booktype');
-        bookBlock.appendChild(booktype);
+ 
 
         var descParagraph = document.createElement('p');
         descParagraph.innerText = book.desc;

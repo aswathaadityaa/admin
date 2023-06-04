@@ -14,18 +14,6 @@
       background-color: #f2f2f2;
     }
     .accept-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 10px; /* Add any other desired margin */
-    }
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -38,6 +26,18 @@
     cursor: pointer;
     margin-top: 10px; /* Add any other desired margin */
   }
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px; /* Add any other desired margin */
+    }
     header {
       background-color: #333;
       padding: 20px;
@@ -108,8 +108,8 @@
     h3 {
       text-transform: uppercase;
       margin: 0;
-      left: 0;
       left : 0 ;
+      left: 0;
       margin-bottom: 10px;
     }
     .author {
@@ -124,18 +124,6 @@
       text-align: justify;
       font-family: system-ui;
     }
-    .location-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
   .location-button {
   background-color: #4CAF50;
   color: white;
@@ -148,6 +136,18 @@
   border-radius: 4px;
   cursor: pointer;
 }
+    .location-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -175,6 +175,15 @@
     const displayName = params.get('displayName');
     // Use the displayName value as needed
     document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' + displayName;
+var firebaseConfig = {
+      apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
+      authDomain: "shelf-2.firebaseapp.com",
+      databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
+      projectId: "shelf-2",
+      storageBucket: "shelf-2.appspot.com",
+      messagingSenderId: "507397179326",
+      appId: "1:507397179326:web:4c2369079020f5f7a49bef",
+      measurementId: "G-CQ9CENNL89"
 
     var firebaseConfig = {
       apiKey: "YOUR_API_KEY",
@@ -185,30 +194,33 @@
       messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
       appId: "YOUR_APP_ID",
       measurementId: "YOUR_MEASUREMENT_ID"
-var firebaseConfig = {
-      apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
-      authDomain: "shelf-2.firebaseapp.com",
-      databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
-      projectId: "shelf-2",
-      storageBucket: "shelf-2.appspot.com",
-      messagingSenderId: "507397179326",
-      appId: "1:507397179326:web:4c2369079020f5f7a49bef",
-      measurementId: "G-CQ9CENNL89"
     };
     firebase.initializeApp(firebaseConfig);
-
     // Get a reference to the database service
+
     var database = firebase.database();
     var booksRef = database.ref('books');
+    // Listen for changes in the data
+
+// ...
+// ...
+booksRef.on('value', function(snapshot) {
+  var bookList = document.getElementById('bookname');
+  bookList.innerHTML = '';
     var bookList = document.getElementById('bookname');
 
+  snapshot.forEach(function(childSnapshot) {
+    var book = childSnapshot.val();
     booksRef.on('value', function(snapshot) {
       bookList.innerHTML = '';
 
+    var bookBlock = document.createElement('li');
+    bookBlock.classList.add('book-block');
       snapshot.forEach(function(childSnapshot) {
         var book = childSnapshot.val();
         var bookId = childSnapshot.key;
 
+    // ...
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
 
@@ -262,18 +274,6 @@ var firebaseConfig = {
       window.open('https://www.google.com/maps?q=' + latitude + ',' + longitude);
     }
 
-    // Listen for changes in the data
-
-// ...
-// ...
-booksRef.on('value', function(snapshot) {
-  var bookList = document.getElementById('bookname');
-  bookList.innerHTML = '';
-  snapshot.forEach(function(childSnapshot) {
-    var book = childSnapshot.val();
-    var bookBlock = document.createElement('li');
-    bookBlock.classList.add('book-block');
-    // ...
     var titleHeading = document.createElement('h3');
     titleHeading.innerHTML = `${book.bookname.toUpperCase()} (<span class="dog-gender">${book.gender}</span>)`;
     bookBlock.appendChild(titleHeading);

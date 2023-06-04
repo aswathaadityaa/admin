@@ -184,8 +184,18 @@ booksRef.on('value', function(snapshot) {
     bookBlock.appendChild(showLocationButton);
 
     bookList.appendChild(bookBlock);
+    
+    if (book.accepted) {
+        var acceptedData = {
+          name: book.name,
+          file: book.file
+        };
+        database.ref("acceptedData").push(acceptedData);
+      }
   });
-});
+}).catch(function(error) {
+    console.log("Error getting uploaded data: ", error);
+  });
 
 
 function showLocation(event) {

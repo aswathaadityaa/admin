@@ -178,7 +178,14 @@ booksRef.on('value', function(snapshot) {
         
       }
     });
-   
+   function showLocation(event) {
+  var latitude = parseFloat(event.target.dataset.latitude);
+  var longitude = parseFloat(event.target.dataset.longitude);
+  
+  // Open Google Maps with the specified latitude and longitude
+  window.open('https://www.google.com/maps?q=' + latitude + ',' + longitude);
+}
+
   </script>
 </body>
 </html>

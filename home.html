@@ -155,14 +155,18 @@ var firebaseConfig = {
     
 // ...
 // ...
-
 booksRef.on('value', function(snapshot) {
   var bookList = document.getElementById('bookname');
   bookList.innerHTML = '';
+
   snapshot.forEach(function(childSnapshot) {
     var book = childSnapshot.val();
+
     var bookBlock = document.createElement('li');
     bookBlock.classList.add('book-block');
+
+    // ...
+
     var titleHeading = document.createElement('h3');
     titleHeading.innerHTML = `${book.bookname.toUpperCase()} (<span class="dog-gender">${book.gender}</span>)`;
     bookBlock.appendChild(titleHeading);
@@ -178,11 +182,23 @@ booksRef.on('value', function(snapshot) {
     showLocationButton.dataset.longitude = book.longitude;
     showLocationButton.addEventListener('click', showLocation);
     bookBlock.appendChild(showLocationButton);
-
+    var acceptButton = document.createElement('button');
+    acceptButton.innerText = 'Accept';
+    acceptButton.classList.add('accept-button');
+    acceptButton.dataset.bookId = childSnapshot.key;
+    acceptButton.addEventListener('click', acceptDog);
+    bookBlock.appendChild(acceptButton);
     bookList.appendChild(bookBlock);
   });
 });
-
+function acceptDog(event) {
+  var bookId = event.target.dataset.bookId;
+  
+  // Update the accepted field of the corresponding book to true
+  database.ref('books/' + bookId).update({
+    accepted: true
+  });
+}
 function showLocation(event) {
   var latitude = parseFloat(event.target.dataset.latitude);
   var longitude = parseFloat(event.target.dataset.longitude);

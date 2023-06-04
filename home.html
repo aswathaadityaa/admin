@@ -196,6 +196,14 @@ booksRef.on('value', function(snapshot) {
     acceptButton.classList.add('accept-button');
     acceptButton.dataset.bookId = childSnapshot.key;
     acceptButton.addEventListener('click', acceptDog);
+    // Retrieve the accepted status from the database
+    var accepted = childSnapshot.child('accepted').val();
+
+    // Update the button display based on the accepted status
+    if (accepted === true) {
+      acceptButton.innerText = 'Accepted';
+      acceptButton.disabled = true;
+    }
     bookBlock.appendChild(acceptButton);
     bookList.appendChild(bookBlock);
   });

@@ -110,7 +110,6 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
   </style>
 </head>
 <body>
@@ -123,6 +122,7 @@
     <section id="books">
       <center>
         <ul id="bookname"></ul>
+        <button class="accept-button" data-book-id="${childSnapshot.key}">Accept</button>
       </center>
     </section>
   </main>
@@ -154,6 +154,7 @@ var firebaseConfig = {
     // Listen for changes in the data
     
 // ...
+// ...
 
 booksRef.on('value', function(snapshot) {
   var bookList = document.getElementById('bookname');
@@ -165,39 +166,27 @@ booksRef.on('value', function(snapshot) {
     var bookBlock = document.createElement('li');
     bookBlock.classList.add('book-block');
 
-    var titleHeading = document.createElement('h3');
-    titleHeading.innerHTML = `${book.bookname.toUpperCase()} (<span class="dog-gender">${book.gender}</span>)`;
-    bookBlock.appendChild(titleHeading);
+    // ...
 
-    var detailsParagraph = document.createElement('p');
-    detailsParagraph.innerHTML =
-       book.dogtype.toUpperCase() + '<br>' +
-      '<strong>About </strong> ' + book.desc ;
-    bookBlock.appendChild(detailsParagraph);
-
-    var showLocationButton = document.createElement('button');
-    showLocationButton.innerText = 'Location';
-    showLocationButton.classList.add('location-button');
-    showLocationButton.dataset.latitude = book.latitude;
-    showLocationButton.dataset.longitude = book.longitude;
-    showLocationButton.addEventListener('click', showLocation);
-    bookBlock.appendChild(showLocationButton);
+    var acceptButton = document.createElement('button');
+    acceptButton.innerText = 'Accept';
+    acceptButton.classList.add('accept-button');
+    acceptButton.dataset.bookId = childSnapshot.key;
+    acceptButton.addEventListener('click', acceptDog);
+    bookBlock.appendChild(acceptButton);
 
     bookList.appendChild(bookBlock);
-    
-    if (book.accepted) {
-        var acceptedData = {
-          name: book.name,
-          file: book.file
-        };
-        database.ref("acceptedData").push(acceptedData);
-      }
   });
-}).catch(function(error) {
-    console.log("Error getting uploaded data: ", error);
+});
+
+function acceptDog(event) {
+  var bookId = event.target.dataset.bookId;
+  
+  // Update the accepted field of the corresponding book to true
+  database.ref('books/' + bookId).update({
+    accepted: true
   });
-
-
+}
 function showLocation(event) {
   var latitude = parseFloat(event.target.dataset.latitude);
   var longitude = parseFloat(event.target.dataset.longitude);
@@ -205,9 +194,7 @@ function showLocation(event) {
   // Open Google Maps with the specified latitude and longitude
   window.open('https://www.google.com/maps?q=' + latitude + ',' + longitude);
 }
-
 // ...
-
     // Check if a user is already logged in
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {

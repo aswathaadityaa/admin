@@ -98,7 +98,19 @@
       text-align: justify;
       font-family: system-ui;
     }
-  
+  .location-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
   </style>
 </head>
 <body>
@@ -164,13 +176,13 @@ booksRef.on('value', function(snapshot) {
       
     bookBlock.appendChild(detailsParagraph);
 
-    // Create a button to show the location
-    var showLocationButton = document.createElement('button');
-    showLocationButton.innerText = 'Location';
-    showLocationButton.dataset.latitude = book.latitude;
-    showLocationButton.dataset.longitude = book.longitude;
-    showLocationButton.addEventListener('click', showLocation);
-    bookBlock.appendChild(showLocationButton);
+   var showLocationButton = document.createElement('button');
+showLocationButton.innerText = 'Location';
+showLocationButton.classList.add('location-button');
+showLocationButton.dataset.latitude = book.latitude;
+showLocationButton.dataset.longitude = book.longitude;
+showLocationButton.addEventListener('click', showLocation);
+bookBlock.appendChild(showLocationButton);
 
     bookList.appendChild(bookBlock);
   });

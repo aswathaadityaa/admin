@@ -201,12 +201,16 @@ booksRef.on('value', function(snapshot) {
   });
 });
 function acceptDog(event) {
-  var bookId = event.target.dataset.bookId;
-  
+ var bookId = event.target.dataset.bookId;
+
   // Update the accepted field of the corresponding book to true
   database.ref('books/' + bookId).update({
     accepted: true
   });
+
+  // Change the display of the accept button to "Accepted"
+  event.target.innerText = "Accepted";
+  event.target.disabled = true;
 }
 function showLocation(event) {
   var latitude = parseFloat(event.target.dataset.latitude);

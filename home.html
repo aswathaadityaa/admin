@@ -140,55 +140,31 @@ var firebaseConfig = {
     var database = firebase.database();
     var booksRef = database.ref('books');
     // Listen for changes in the data
-    booksRef.on('value', function(snapshot) {
-
     
-      var bookList = document.getElementById('bookname');
-      var bookList = document.getElementById('adoptme');
-      bookList.innerHTML = '';
+booksRef.on('value', function(snapshot) {
+  var bookList = document.getElementById('bookname');
+  bookList.innerHTML = '';
 
+  snapshot.forEach(function(childSnapshot) {
+    var book = childSnapshot.val();
 
-      
-      
-      snapshot.forEach(function(childSnapshot) {
+    var bookBlock = document.createElement('li');
+    bookBlock.classList.add('book-block');
 
-        var book = childSnapshot.val();
-      
-        
-        var bookBlock = document.createElement('li');
-        bookBlock.classList.add('book-block');
-        
-   
-        
-       
-        
-        
-        var bookDetails = document.createElement('div');
-        bookDetails.classList.add('book-details');
+    var titleHeading = document.createElement('h3');
+    titleHeading.innerText = book.bookname.toUpperCase() + " - " + book.dogtype.toUpperCase();
+    bookBlock.appendChild(titleHeading);
 
-        
-        
+    var detailsParagraph = document.createElement('p');
+    detailsParagraph.innerHTML =
+      '<strong>Gender:</strong> ' + book.gender + '<br>' +
+      '<strong>Description:</strong> ' + book.desc + '<br>' +
+      '<strong>Location:</strong> ' + 'Latitude: ' + book.latitude + ', Longitude: ' + book.longitude;
+    bookBlock.appendChild(detailsParagraph);
 
-
-        var titleHeading = document.createElement('h3');
-    titleHeading.innerText = book.bookname.toUpperCase() + " a " +book.booktype.toUpperCase() ;
-    titleHeading.innerText = book.bookname.toUpperCase() ;
-        bookDetails.appendChild(titleHeading);  
-        var booktype = document.createElement('p');
-        
-
- 
-
-        var descParagraph = document.createElement('p');
-        descParagraph.innerText = book.desc;
-        descParagraph.classList.add('description');
-        bookDetails.appendChild(descParagraph);
-        bookBlock.appendChild(bookDetails);
-       
-        
-        bookList.appendChild(bookBlock);
-      });
-    });
+    bookList.appendChild(bookBlock);
+  });
+});
     // Check if a user is already logged in
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {

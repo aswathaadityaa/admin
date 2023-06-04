@@ -171,7 +171,7 @@ booksRef.on('value', function(snapshot) {
 
     var detailsParagraph = document.createElement('p');
     detailsParagraph.innerHTML =
-      '<strong>Dog Type:</strong> ' + book.dogtype.toUpperCase() + '<br>' +
+       book.dogtype.toUpperCase() + '<br>' +
       '<strong>About Dog:</strong> ' + book.desc + '<br>';
     bookBlock.appendChild(detailsParagraph);
 

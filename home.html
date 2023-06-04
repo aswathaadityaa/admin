@@ -174,14 +174,9 @@ var firebaseConfig = {
         
 
 
-        var titleHeading = document.createElement('h3');
-    titleHeading.innerText = book.bookname.toUpperCase();
+         var titleHeading = document.createElement('h3');
+        titleHeading.innerText = book.bookname.toUpperCase() + " a " + book.dogtype.toUpperCase() + " (" + book.gender.toUpperCase() + ")";
         bookDetails.appendChild(titleHeading);  
-        var booktype = document.createElement('p');
-        
-
-       dogtype.classList.add('dogtype');
-        bookBlock.appendChild(dogtype);
 
 
 

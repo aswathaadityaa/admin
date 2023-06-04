@@ -20,11 +20,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family:Fjalla One;
     }
     h1 {
       margin: 0;
-      
     }
     nav ul {
       list-style-type: none;
@@ -103,8 +101,9 @@
 </head>
 <body>
   <header>
-    <h1>ADAPT ME <img src="https://clipart-library.com/images/BigrG6d8T.png" style="width:55px;height:40px;margin-left:10px;"></h1>
-   
+    <h1>ADAPT ME</h1>
+    <img src= "paw-logo-cat-dog-animal-pet-footprint-icon-vector-23032574.jpg"></img>
+
     <h2 id="myprofile"></h2>
   </header>
   <main>
@@ -138,11 +137,11 @@ var firebaseConfig = {
     firebase.initializeApp(firebaseConfig);
     // Get a reference to the database service
     var database = firebase.database();
-    var booksRef = database.ref('adoptme');
+    var booksRef = database.ref('books');
     // Listen for changes in the data
     booksRef.on('value', function(snapshot) {
     
-      var bookList = document.getElementById('dogname');
+      var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
       
       
@@ -168,7 +167,7 @@ var firebaseConfig = {
         
         
         var titleHeading = document.createElement('h3');
-    titleHeading.innerText = book.bookname.toUpperCase() ;
+    titleHeading.innerText = book.bookname.toUpperCase() + " a " +book.booktype.toUpperCase() ;
         bookDetails.appendChild(titleHeading);  
         var booktype = document.createElement('p');
         
@@ -177,7 +176,10 @@ var firebaseConfig = {
     
         
         
- 
+        var authorParagraph = document.createElement('p');
+        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
+        authorParagraph.classList.add('author');
+        bookDetails.appendChild(authorParagraph);
       
         
         

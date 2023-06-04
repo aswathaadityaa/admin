@@ -183,23 +183,6 @@ var firebaseConfig = {
         booktype.classList.add('booktype');
         bookBlock.appendChild(booktype);
 
-
-
-
-
-
-
-
-
-
-        var authorParagraph = document.createElement('p');
-        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
-        authorParagraph.classList.add('author');
-        bookDetails.appendChild(authorParagraph);
-
-
-
-
         var descParagraph = document.createElement('p');
         descParagraph.innerText = book.desc;
         descParagraph.classList.add('description');

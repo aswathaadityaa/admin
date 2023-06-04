@@ -141,12 +141,11 @@ var firebaseConfig = {
     var booksRef = database.ref('books');
     // Listen for changes in the data
     booksRef.on('value', function(snapshot) {
-
+    
       var bookList = document.getElementById('bookname');
-      var bookList = document.getElementById('adoptme');
       bookList.innerHTML = '';
-
-
+      
+      
       snapshot.forEach(function(childSnapshot) {
         
         var book = childSnapshot.val();
@@ -166,22 +165,27 @@ var firebaseConfig = {
         var bookDetails = document.createElement('div');
         bookDetails.classList.add('book-details');
         
-        
-        
+
+
         var titleHeading = document.createElement('h3');
+    titleHeading.innerText = book.bookname.toUpperCase() + " a " +book.booktype.toUpperCase() ;
     titleHeading.innerText = book.bookname.toUpperCase() ;
         bookDetails.appendChild(titleHeading);  
         var booktype = document.createElement('p');
-        
+
         booktype.classList.add('booktype');
         bookBlock.appendChild(booktype);
-    
-        
-        
- 
-      
-        
-        
+
+
+
+        var authorParagraph = document.createElement('p');
+        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
+        authorParagraph.classList.add('author');
+        bookDetails.appendChild(authorParagraph);
+
+
+
+
         var descParagraph = document.createElement('p');
         descParagraph.innerText = book.desc;
         descParagraph.classList.add('description');

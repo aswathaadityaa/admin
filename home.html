@@ -140,59 +140,51 @@ var firebaseConfig = {
     var database = firebase.database();
     var booksRef = database.ref('books');
     // Listen for changes in the data
+    <script>
+    // ... existing JavaScript code ...
     booksRef.on('value', function(snapshot) {
-    
       var bookList = document.getElementById('bookname');
       bookList.innerHTML = '';
       
-      
       snapshot.forEach(function(childSnapshot) {
-        
         var book = childSnapshot.val();
-      
         
         var bookBlock = document.createElement('li');
         bookBlock.classList.add('book-block');
         
-   
-        
         var bookImage = document.createElement('img');
-        bookImage.src = book.imgurl; // Set the image source to the imgurl
+        bookImage.src = book.imgurl;
         bookImage.classList.add('book-image');
         bookBlock.appendChild(bookImage);
-        
         
         var bookDetails = document.createElement('div');
         bookDetails.classList.add('book-details');
         
-
-
         var titleHeading = document.createElement('h3');
-    titleHeading.innerText = book.bookname.toUpperCase() + " a " +book.booktype.toUpperCase() ;
-    titleHeading.innerText = book.bookname.toUpperCase() ;
-        bookDetails.appendChild(titleHeading);  
+        titleHeading.innerText = book.bookname.toUpperCase();
+        bookDetails.appendChild(titleHeading);
+        
         var booktype = document.createElement('p');
-
         booktype.classList.add('booktype');
+        booktype.innerText = 'Dog Type: ' + book.dogtype;
         bookBlock.appendChild(booktype);
-
-
-
+        
         var authorParagraph = document.createElement('p');
-        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
+        authorParagraph.innerHTML = '<em>by ' + book.author + '</em>';
         authorParagraph.classList.add('author');
         bookDetails.appendChild(authorParagraph);
-
-
-
-
+        
         var descParagraph = document.createElement('p');
-        descParagraph.innerText = book.desc;
+        descParagraph.innerText = 'Description: ' + book.desc;
         descParagraph.classList.add('description');
         bookDetails.appendChild(descParagraph);
-        bookBlock.appendChild(bookDetails);
-       
         
+        var locationParagraph = document.createElement('p');
+        locationParagraph.innerText = 'Location: Latitude ' + book.latitude + ', Longitude ' + book.longitude;
+        locationParagraph.classList.add('location');
+        bookDetails.appendChild(locationParagraph);
+        
+        bookBlock.appendChild(bookDetails);
         bookList.appendChild(bookBlock);
       });
     });

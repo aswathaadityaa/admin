@@ -14,6 +14,18 @@
       background-color: #f2f2f2;
     }
     .accept-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px; /* Add any other desired margin */
+    }
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -37,7 +49,7 @@
     }
     h1 {
       margin: 0;
-      
+
     }
     nav ul {
       list-style-type: none;
@@ -96,6 +108,7 @@
     h3 {
       text-transform: uppercase;
       margin: 0;
+      left: 0;
       left : 0 ;
       margin-bottom: 10px;
     }
@@ -110,6 +123,18 @@
       margin-top: 10px;
       text-align: justify;
       font-family: system-ui;
+    }
+    .location-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
     }
   .location-button {
   background-color: #4CAF50;
@@ -128,19 +153,19 @@
 <body>
   <header>
     <h1>ADAPT ME <img src="https://clipart-library.com/images/BigrG6d8T.png" style="width:55px;height:40px;margin-left:10px;"></h1>
-   
+
     <h2 id="myprofile"></h2>
   </header>
   <main>
     <section id="books">
       <center>
         <ul id="bookname"></ul>
-       
+
       </center>
     </section>
   </main>
- 
-  
+
+
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
@@ -150,6 +175,16 @@
     const displayName = params.get('displayName');
     // Use the displayName value as needed
     document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' + displayName;
+
+    var firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      databaseURL: "YOUR_DATABASE_URL",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID",
+      measurementId: "YOUR_MEASUREMENT_ID"
 var firebaseConfig = {
       apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
       authDomain: "shelf-2.firebaseapp.com",
@@ -161,11 +196,74 @@ var firebaseConfig = {
       measurementId: "G-CQ9CENNL89"
     };
     firebase.initializeApp(firebaseConfig);
+
     // Get a reference to the database service
     var database = firebase.database();
     var booksRef = database.ref('books');
+    var bookList = document.getElementById('bookname');
+
+    booksRef.on('value', function(snapshot) {
+      bookList.innerHTML = '';
+
+      snapshot.forEach(function(childSnapshot) {
+        var book = childSnapshot.val();
+        var bookId = childSnapshot.key;
+
+        var bookBlock = document.createElement('li');
+        bookBlock.classList.add('book-block');
+
+        var titleHeading = document.createElement('h3');
+        titleHeading.innerHTML = `${book.bookname.toUpperCase()} (<span class="dog-gender">${book.gender}</span>)`;
+        bookBlock.appendChild(titleHeading);
+
+        var detailsParagraph = document.createElement('p');
+        detailsParagraph.innerHTML =
+          book.dogtype.toUpperCase() + '<br>' +
+          '<strong>About </strong> ' + book.desc;
+        bookBlock.appendChild(detailsParagraph);
+
+        var showLocationButton = document.createElement('button');
+        showLocationButton.innerText = 'Location';
+        showLocationButton.classList.add('location-button');
+        showLocationButton.dataset.latitude = book.latitude;
+        showLocationButton.dataset.longitude = book.longitude;
+        showLocationButton.addEventListener('click', showLocation);
+        bookBlock.appendChild(showLocationButton);
+
+        var acceptButton = document.createElement('button');
+        acceptButton.innerText = 'Accept';
+        acceptButton.classList.add('accept-button');
+        acceptButton.dataset.bookId = bookId;
+        acceptButton.addEventListener('click', acceptDog);
+        bookBlock.appendChild(acceptButton);
+
+        bookList.appendChild(bookBlock);
+      });
+    });
+
+    function acceptDog(event) {
+      var bookId = event.target.dataset.bookId;
+
+      // Update the accepted field of the corresponding book to true
+      database.ref('books/' + bookId).update({
+        accepted: true
+      });
+
+      // Remove the book block from the DOM
+      var bookBlock = event.target.parentNode;
+      bookBlock.parentNode.removeChild(bookBlock);
+    }
+
+    function showLocation(event) {
+      var latitude = parseFloat(event.target.dataset.latitude);
+      var longitude = parseFloat(event.target.dataset.longitude);
+
+      // Open Google Maps with the specified latitude and longitude
+      window.open('https://www.google.com/maps?q=' + latitude + ',' + longitude);
+    }
+
     // Listen for changes in the data
-    
+
 // ...
 // ...
 booksRef.on('value', function(snapshot) {
@@ -202,38 +300,16 @@ booksRef.on('value', function(snapshot) {
 });
 function acceptDog(event) {
   var bookId = event.target.dataset.bookId;
-  var bookRef = database.ref('books/' + bookId);
 
-  // Check the value of the accepted field in the database
-  bookRef.once('value', function(snapshot) {
-    var accepted = snapshot.child('accepted').val();
-
-    if (accepted === true) {
-      // If the accepted field is already true, update the button display to "Accepted"
-      event.target.innerText = 'Accepted';
-      event.target.disabled = true;
-    } else {
-      // Update the accepted field in the database to true
-      bookRef.update({
-        accepted: true
-      }, function(error) {
-        if (error) {
-          // Handle the error
-          console.log('Error updating accepted field:', error);
-        } else {
-          // Update the button display to "Accepted"
-          event.target.innerText = 'Accepted';
-          event.target.disabled = true;
-        }
-      });
-    }
+  // Update the accepted field of the corresponding book to true
+  database.ref('books/' + bookId).update({
+    accepted: true
   });
 }
-
 function showLocation(event) {
   var latitude = parseFloat(event.target.dataset.latitude);
   var longitude = parseFloat(event.target.dataset.longitude);
-  
+
   // Open Google Maps with the specified latitude and longitude
   window.open('https://www.google.com/maps?q=' + latitude + ',' + longitude);
 }
@@ -248,10 +324,10 @@ function showLocation(event) {
           document.getElementById('nameInput').value = currentUser.displayName;
         }
       } else {
-        
+
       }
     });
-  
+
   </script>
 </body>
 </html>

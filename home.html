@@ -111,6 +111,7 @@
     <section id="books">
       <center>
         <ul id="bookname"></ul>
+        <button id="locationBtn">Location</button>
       </center>
     </section>
   </main>
@@ -174,27 +175,20 @@ var firebaseConfig = {
 
 
         var titleHeading = document.createElement('h3');
-    titleHeading.innerText = book.bookname.toUpperCase() + " a " +book.booktype.toUpperCase() ;
-    titleHeading.innerText = book.bookname.toUpperCase() ;
+    titleHeading.innerText = book.bookname.toUpperCase();
         bookDetails.appendChild(titleHeading);  
         var booktype = document.createElement('p');
         
 
-        booktype.classList.add('booktype');
-        bookBlock.appendChild(booktype);
-
-
-
-
-
-
+       dogtype.classList.add('dogtype');
+        bookBlock.appendChild(dogtype);
 
 
 
 
         var authorParagraph = document.createElement('p');
-        authorParagraph.innerHTML = '<em>'+ 'by ' + book.author + '</em>';
-        authorParagraph.classList.add('author');
+        authorParagraph.innerHTML = '<em>'+ 'by ' + book.gender + '</em>';
+        authorParagraph.classList.add('gender');
         bookDetails.appendChild(authorParagraph);
 
 
@@ -210,6 +204,26 @@ var firebaseConfig = {
         bookList.appendChild(bookBlock);
       });
     });
+    // Fetch latitude and longitude from Firebase
+var locationRef = database.ref('location');
+locationRef.on('value', function(snapshot) {
+  var location = snapshot.val();
+  var latitude = location.latitude;
+  var longitude = location.longitude;
+  
+  // Set the button click event handler
+  var locationBtn = document.getElementById('locationBtn');
+  locationBtn.addEventListener('click', function() {
+    redirectToGoogleMaps(latitude, longitude);
+  });
+});
+
+// Function to redirect to Google Maps with latitude and longitude
+function redirectToGoogleMaps(latitude, longitude) {
+  var mapsUrl = 'https://www.google.com/maps?q=' + latitude + ',' + longitude;
+  window.open(mapsUrl, '_blank');
+}
+In this example, assume you have a node named 'location' in your Fireb
     // Check if a user is already logged in
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {

@@ -166,27 +166,27 @@ booksRef.on('value', function(snapshot) {
     bookBlock.classList.add('book-block');
 
     var titleHeading = document.createElement('h3');
-    titleHeading.innerText = book.bookname.toUpperCase() + " - " + book.dogtype.toUpperCase();
+    titleHeading.innerHTML = `${book.bookname.toUpperCase()} (<span class="dog-gender">${book.gender}</span>)`;
     bookBlock.appendChild(titleHeading);
 
     var detailsParagraph = document.createElement('p');
     detailsParagraph.innerHTML =
-      '<strong>Gender:</strong> ' + book.gender + '<br>' +
-      '<strong>About Dog:</strong> ' + book.desc + '<br>' 
-      
+      '<strong>Dog Type:</strong> ' + book.dogtype.toUpperCase() + '<br>' +
+      '<strong>About Dog:</strong> ' + book.desc + '<br>';
     bookBlock.appendChild(detailsParagraph);
 
-   var showLocationButton = document.createElement('button');
-showLocationButton.innerText = 'Location';
-showLocationButton.classList.add('location-button');
-showLocationButton.dataset.latitude = book.latitude;
-showLocationButton.dataset.longitude = book.longitude;
-showLocationButton.addEventListener('click', showLocation);
-bookBlock.appendChild(showLocationButton);
+    var showLocationButton = document.createElement('button');
+    showLocationButton.innerText = 'Location';
+    showLocationButton.classList.add('location-button');
+    showLocationButton.dataset.latitude = book.latitude;
+    showLocationButton.dataset.longitude = book.longitude;
+    showLocationButton.addEventListener('click', showLocation);
+    bookBlock.appendChild(showLocationButton);
 
     bookList.appendChild(bookBlock);
   });
 });
+
 
 function showLocation(event) {
   var latitude = parseFloat(event.target.dataset.latitude);

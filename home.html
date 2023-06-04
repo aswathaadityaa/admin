@@ -141,6 +141,8 @@ var firebaseConfig = {
     var booksRef = database.ref('books');
     // Listen for changes in the data
     
+// ...
+
 booksRef.on('value', function(snapshot) {
   var bookList = document.getElementById('bookname');
   bookList.innerHTML = '';
@@ -162,9 +164,28 @@ booksRef.on('value', function(snapshot) {
       '<strong>Location:</strong> ' + 'Latitude: ' + book.latitude + ', Longitude: ' + book.longitude;
     bookBlock.appendChild(detailsParagraph);
 
+    // Create a button to show the location
+    var showLocationButton = document.createElement('button');
+    showLocationButton.innerText = 'Location';
+    showLocationButton.dataset.latitude = book.latitude;
+    showLocationButton.dataset.longitude = book.longitude;
+    showLocationButton.addEventListener('click', showLocation);
+    bookBlock.appendChild(showLocationButton);
+
     bookList.appendChild(bookBlock);
   });
 });
+
+function showLocation(event) {
+  var latitude = parseFloat(event.target.dataset.latitude);
+  var longitude = parseFloat(event.target.dataset.longitude);
+  
+  // Open Google Maps with the specified latitude and longitude
+  window.open('https://www.google.com/maps?q=' + latitude + ',' + longitude);
+}
+
+// ...
+
     // Check if a user is already logged in
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -178,14 +199,7 @@ booksRef.on('value', function(snapshot) {
         
       }
     });
-   function showLocation(event) {
-  var latitude = parseFloat(event.target.dataset.latitude);
-  var longitude = parseFloat(event.target.dataset.longitude);
   
-  // Open Google Maps with the specified latitude and longitude
-  window.open('https://www.google.com/maps?q=' + latitude + ',' + longitude);
-}
-
   </script>
 </body>
 </html>

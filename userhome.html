@@ -1,1 +1,211 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* Add custom CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    header {
+      background-color: #333;
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family:Fjalla One;
+    }
+    h1 {
+      margin: 0;
+      
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav ul li {
+      margin-right: 10px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    main {
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 60%;
+      text-align: end;
+    }
+    #bookname {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .book-block {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .book-image {
+      width: 200px;
+      margin-bottom: 30px;
+      border-radius: 4px;
+      height: 300px;
+      width: 200px;
+    }
+    .book-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h3 {
+      text-transform: uppercase;
+      margin: 0;
+      left : 0 ;
+      margin-bottom: 10px;
+    }
+    .author {
+      color: #777;
+      margin: 0;
+      font-style: italic;
+    }
+    .description {
+      font-size: 14px;
+      margin: 0;
+      margin-top: 10px;
+      text-align: justify;
+      font-family: system-ui;
+    }
+  .location-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ADAPT ME <img src="https://clipart-library.com/images/BigrG6d8T.png" style="width:55px;height:40px;margin-left:10px;"></h1>
+   
+    <h2 id="myprofile"></h2>
+  </header>
+  <main>
+    <section id="books">
+      <center>
+        <ul id="bookname"></ul>
+        <button class="accept-button" data-book-id="${childSnapshot.key}">Accept</button>
+      </center>
+    </section>
+  </main>
+ 
+  
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script>
+    // Get the query parameter value
+    const params = new URLSearchParams(window.location.search);
+    const displayName = params.get('displayName');
+    // Use the displayName value as needed
+    document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' + displayName;
+var firebaseConfig = {
+      apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
+      authDomain: "shelf-2.firebaseapp.com",
+      databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
+      projectId: "shelf-2",
+      storageBucket: "shelf-2.appspot.com",
+      messagingSenderId: "507397179326",
+      appId: "1:507397179326:web:4c2369079020f5f7a49bef",
+      measurementId: "G-CQ9CENNL89"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // Get a reference to the database service
+    var database = firebase.database();
+    var booksRef = database.ref('books');
+    // Listen for changes in the data
+    
+// ...
+// ...
+
+booksRef.on('value', function(snapshot) {
+  var bookList = document.getElementById('bookname');
+  bookList.innerHTML = '';
+  snapshot.forEach(function(childSnapshot) {
+    var book = childSnapshot.val();
+    var bookBlock = document.createElement('li');
+    bookBlock.classList.add('book-block');
+    var titleHeading = document.createElement('h3');
+    titleHeading.innerHTML = `${book.bookname.toUpperCase()} (<span class="dog-gender">${book.gender}</span>)`;
+    bookBlock.appendChild(titleHeading);
+    var detailsParagraph = document.createElement('p');
+    detailsParagraph.innerHTML =
+       book.dogtype.toUpperCase() + '<br>' +
+      '<strong>About </strong> ' + book.desc ;
+    bookBlock.appendChild(detailsParagraph);
+    var showLocationButton = document.createElement('button');
+    showLocationButton.innerText = 'Location';
+    showLocationButton.classList.add('location-button');
+    showLocationButton.dataset.latitude = book.latitude;
+    showLocationButton.dataset.longitude = book.longitude;
+    showLocationButton.addEventListener('click', showLocation);
+    bookBlock.appendChild(showLocationButton);
+
+    bookList.appendChild(bookBlock);
+  });
+});
+
+function showLocation(event) {
+  var latitude = parseFloat(event.target.dataset.latitude);
+  var longitude = parseFloat(event.target.dataset.longitude);
+  
+  // Open Google Maps with the specified latitude and longitude
+  window.open('https://www.google.com/maps?q=' + latitude + ',' + longitude);
+}
+// ...
+    // Check if a user is already logged in
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in
+        var currentUser = firebase.auth().currentUser;
+        if (currentUser && currentUser.displayName) {
+          // Set the display name in the comment form
+          document.getElementById('nameInput').value = currentUser.displayName;
+        }
+      } else {
+        
+      }
+    });
+  
+  </script>
+</body>
+</html>

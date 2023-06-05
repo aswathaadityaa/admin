@@ -134,6 +134,8 @@
   <main>
     <section id="books">
       <center>
+        <div id="photos-container" style="width:55px;height:40px;margin-left:10px;"></div>
+
         <ul id="bookname"></ul>
        
       </center>
@@ -143,8 +145,29 @@
   
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-storage.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
   <script>
+    // Retrieve the uploaded photos from Firebase Storage
+storageRef.listAll().then(function(result) {
+  result.items.forEach(function(itemRef) {
+    itemRef.getDownloadURL().then(function(url) {
+      // Create an image element and set its source to the download URL
+      var img = document.createElement("img");
+      img.src = url;
+
+      // Append the image element to a container element (e.g., a div)
+      var container = document.getElementById("photos-container");
+      container.appendChild(img);
+    }).catch(function(error) {
+      console.log("Error getting download URL:", error);
+    });
+  });
+}).catch(function(error) {
+  console.log("Error retrieving photos from Firebase Storage:", error);
+});
+
     // Get the query parameter value
     const params = new URLSearchParams(window.location.search);
     const displayName = params.get('displayName');

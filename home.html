@@ -149,6 +149,8 @@
 
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
   <script>
+    var storage = firebase.storage();
+var storageRef = storage.ref();
     // Retrieve the uploaded photos from Firebase Storage
 storageRef.listAll().then(function(result) {
   result.items.forEach(function(itemRef) {

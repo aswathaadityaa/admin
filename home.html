@@ -7,25 +7,28 @@
   <title>Document</title>
   <style>
     /* Add custom CSS styles */
-    body {
+      body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
     }
+
     .accept-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px; /* Add any other desired margin */
-  }
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      /* Add any other desired margin */
+    }
+
     header {
       background-color: #333;
       padding: 20px;
@@ -33,12 +36,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family:Fjalla One;
+      font-family: Fjalla One;
     }
+
     h1 {
       margin: 0;
-      
     }
+
     nav ul {
       list-style-type: none;
       margin: 0;
@@ -47,21 +51,26 @@
       flex-wrap: wrap;
       justify-content: flex-end;
     }
+
     nav ul li {
       margin-right: 10px;
     }
+
     nav ul li a {
       color: white;
       text-decoration: none;
     }
+
     main {
       padding: 20px;
     }
+
     h2 {
       text-align: center;
       font-size: 60%;
       text-align: end;
     }
+
     #bookname {
       list-style-type: none;
       padding: 0;
@@ -69,6 +78,7 @@
       flex-wrap: wrap;
       justify-content: space-between;
     }
+
     .book-block {
       width: 100%;
       max-width: 400px;
@@ -80,28 +90,34 @@
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
+      position: relative;
     }
-    #photos-container{
-      width: 55px;
-    height: 45px;
-    object-fit: cover;
-    border-radius: 4px;
-    z-index: 1; /* Add this property to position the photo above other elements */
+
+    .book-block img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
     }
-    .book-details {
-      position: relative; /* Add this property to create a stacking context for the container */
-    }
+
     h3 {
       text-transform: uppercase;
       margin: 0;
-      left : 0 ;
+      left: 0;
       margin-bottom: 10px;
     }
+
     .author {
       color: #777;
       margin: 0;
       font-style: italic;
     }
+
     .description {
       font-size: 14px;
       margin: 0;
@@ -109,18 +125,19 @@
       text-align: justify;
       font-family: system-ui;
     }
-  .location-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer;
-}
+
+    .location-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>

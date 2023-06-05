@@ -206,6 +206,7 @@
     }).catch(function(error) {
       console.log("Error getting download URL:", error);
     });
+       });
       
 booksRef.on('value', function(snapshot) {
   var bookList = document.getElementById('bookname');
@@ -237,7 +238,7 @@ booksRef.on('value', function(snapshot) {
     acceptButton.addEventListener('click', acceptDog);
     // Retrieve the accepted status from the database
     var accepted = childSnapshot.child('accepted').val();
-  });
+ 
 }).catch(function(error) {
   console.log("Error retrieving photos from Firebase Storage:", error);
 });

@@ -149,26 +149,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
   <script>
-    var storage = firebase.storage();
-var storageRef = storage.ref();
-    // Retrieve the uploaded photos from Firebase Storage
-storageRef.listAll().then(function(result) {
-  result.items.forEach(function(itemRef) {
-    itemRef.getDownloadURL().then(function(url) {
-      // Create an image element and set its source to the download URL
-      var img = document.createElement("img");
-      img.src = url;
-
-      // Append the image element to a container element (e.g., a div)
-      var container = document.getElementById("photos-container");
-      container.appendChild(img);
-    }).catch(function(error) {
-      console.log("Error getting download URL:", error);
-    });
-  });
-}).catch(function(error) {
-  console.log("Error retrieving photos from Firebase Storage:", error);
-});
+  
 
     // Get the query parameter value
     const params = new URLSearchParams(window.location.search);
@@ -232,6 +213,26 @@ booksRef.on('value', function(snapshot) {
     bookBlock.appendChild(acceptButton);
     bookList.appendChild(bookBlock);
   });
+});
+      var storage = firebase.storage();
+var storageRef = storage.ref();
+    // Retrieve the uploaded photos from Firebase Storage
+storageRef.listAll().then(function(result) {
+  result.items.forEach(function(itemRef) {
+    itemRef.getDownloadURL().then(function(url) {
+      // Create an image element and set its source to the download URL
+      var img = document.createElement("img");
+      img.src = url;
+
+      // Append the image element to a container element (e.g., a div)
+      var container = document.getElementById("photos-container");
+      container.appendChild(img);
+    }).catch(function(error) {
+      console.log("Error getting download URL:", error);
+    });
+  });
+}).catch(function(error) {
+  console.log("Error retrieving photos from Firebase Storage:", error);
 });
 function acceptDog(event) {
  var bookId = event.target.dataset.bookId;

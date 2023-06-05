@@ -242,7 +242,7 @@ storageRef.listAll().then(function(result) {
 
       // Append the image element to a container element (e.g., a div)
       var container = document.getElementById("photos-container");
-      container.appendChild(img.src);
+      container.appendChild(img);
     }).catch(function(error) {
       console.log("Error getting download URL:", error);
     });

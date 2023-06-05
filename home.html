@@ -7,28 +7,25 @@
   <title>Document</title>
   <style>
     /* Add custom CSS styles */
-      body {
+    body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
     }
-
     .accept-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 10px;
-      /* Add any other desired margin */
-    }
-
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px; /* Add any other desired margin */
+  }
     header {
       background-color: #333;
       padding: 20px;
@@ -36,13 +33,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: Fjalla One;
+      font-family:Fjalla One;
     }
-
     h1 {
       margin: 0;
+      
     }
-
     nav ul {
       list-style-type: none;
       margin: 0;
@@ -51,26 +47,21 @@
       flex-wrap: wrap;
       justify-content: flex-end;
     }
-
     nav ul li {
       margin-right: 10px;
     }
-
     nav ul li a {
       color: white;
       text-decoration: none;
     }
-
     main {
       padding: 20px;
     }
-
     h2 {
       text-align: center;
       font-size: 60%;
       text-align: end;
     }
-
     #bookname {
       list-style-type: none;
       padding: 0;
@@ -78,7 +69,6 @@
       flex-wrap: wrap;
       justify-content: space-between;
     }
-
     .book-block {
       width: 100%;
       max-width: 400px;
@@ -90,34 +80,28 @@
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
-      position: relative;
     }
-
-    .book-block img {
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
+    #photos-container{
+      width: 55px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 4px;
+    z-index: 1; /* Add this property to position the photo above other elements */
     }
-
+    .book-details {
+      position: relative; /* Add this property to create a stacking context for the container */
+    }
     h3 {
       text-transform: uppercase;
       margin: 0;
-      left: 0;
+      left : 0 ;
       margin-bottom: 10px;
     }
-
     .author {
       color: #777;
       margin: 0;
       font-style: italic;
     }
-
     .description {
       font-size: 14px;
       margin: 0;
@@ -125,19 +109,18 @@
       text-align: justify;
       font-family: system-ui;
     }
-
-    .location-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+  .location-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
   </style>
 </head>
 <body>
@@ -151,8 +134,8 @@
       <center>
        
          
-        
-        <ul id="bookname"> </ul>
+ 
+        <ul id="bookname" class="id="photos-container"> </ul>
        
       </center>
     </section>
@@ -162,17 +145,15 @@
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-storage.js"></script>
-
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
   <script>
   
-
     // Get the query parameter value
     const params = new URLSearchParams(window.location.search);
     const displayName = params.get('displayName');
     // Use the displayName value as needed
     document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' + displayName;
-    var firebaseConfig = {
+var firebaseConfig = {
       apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
       authDomain: "shelf-2.firebaseapp.com",
       databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
@@ -190,25 +171,6 @@
     
 // ...
 // ...
-    var storage = firebase.storage();
-    var storageRef = storage.ref();
-    // Retrieve the uploaded photos from Firebase Storage
-    storageRef.listAll().then(function(result) {
-    result.items.forEach(function(itemRef) {
-    itemRef.getDownloadURL().then(function(url) {
-      // Create an image element and set its source to the download URL
-      var img = document.createElement("img");
-      img.src = url;
-
-      // Append the image element to a container element (e.g., a div)
-      var container = document.getElementById("image");
-      container.appendChild(img);
-    }).catch(function(error) {
-      console.log("Error getting download URL:", error);
-    });
-   });
-  });
-      
 booksRef.on('value', function(snapshot) {
   var bookList = document.getElementById('bookname');
   bookList.innerHTML = '';
@@ -239,10 +201,6 @@ booksRef.on('value', function(snapshot) {
     acceptButton.addEventListener('click', acceptDog);
     // Retrieve the accepted status from the database
     var accepted = childSnapshot.child('accepted').val();
- 
-}).catch(function(error) {
-  console.log("Error retrieving photos from Firebase Storage:", error);
-});
     // Update the button display based on the accepted status
     if (accepted === true) {
       acceptButton.innerText = 'Accepted';
@@ -252,7 +210,27 @@ booksRef.on('value', function(snapshot) {
     bookList.appendChild(bookBlock);
   });
 });
-      
+      var storage = firebase.storage();
+var storageRef = storage.ref();
+    // Retrieve the uploaded photos from Firebase Storage
+storageRef.listAll().then(function(result) {
+  result.items.forEach(function(itemRef) {
+    itemRef.getDownloadURL().then(function(url) {
+      // Create an image element and set its source to the download URL
+      var img = document.createElement("img");
+      img.src = url;
+
+      // Append the image element to a container element (e.g., a div)
+      var container = document.getElementById("photos-container");
+      container.appendChild(img);
+      container.appendChild(img.src);
+    }).catch(function(error) {
+      console.log("Error getting download URL:", error);
+    });
+  });
+}).catch(function(error) {
+  console.log("Error retrieving photos from Firebase Storage:", error);
+});
 function acceptDog(event) {
  var bookId = event.target.dataset.bookId;
   // Update the accepted field of the corresponding book to true
@@ -265,7 +243,6 @@ function acceptDog(event) {
   }).catch(function(error) {
     console.log("Error updating accepted field:", error);
   });
-
   // Change the display of the accept button to "Accepted"
   event.target.innerText = "Accepted";
   event.target.disabled = true;

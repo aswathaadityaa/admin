@@ -172,7 +172,7 @@
     const displayName = params.get('displayName');
     // Use the displayName value as needed
     document.getElementById("myprofile").innerHTML = "WELCOME " + '<br>' + displayName;
-var firebaseConfig = {
+    var firebaseConfig = {
       apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
       authDomain: "shelf-2.firebaseapp.com",
       databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
@@ -190,6 +190,23 @@ var firebaseConfig = {
     
 // ...
 // ...
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+    // Retrieve the uploaded photos from Firebase Storage
+    storageRef.listAll().then(function(result) {
+    result.items.forEach(function(itemRef) {
+    itemRef.getDownloadURL().then(function(url) {
+      // Create an image element and set its source to the download URL
+      var img = document.createElement("img");
+      img.src = url;
+
+      // Append the image element to a container element (e.g., a div)
+      var container = document.getElementById("bookname");
+      container.appendChild(img);
+    }).catch(function(error) {
+      console.log("Error getting download URL:", error);
+    });
+      
 booksRef.on('value', function(snapshot) {
   var bookList = document.getElementById('bookname');
   bookList.innerHTML = '';
@@ -220,23 +237,6 @@ booksRef.on('value', function(snapshot) {
     acceptButton.addEventListener('click', acceptDog);
     // Retrieve the accepted status from the database
     var accepted = childSnapshot.child('accepted').val();
-
-    var storage = firebase.storage();
-    var storageRef = storage.ref();
-    // Retrieve the uploaded photos from Firebase Storage
-    storageRef.listAll().then(function(result) {
-    result.items.forEach(function(itemRef) {
-    itemRef.getDownloadURL().then(function(url) {
-      // Create an image element and set its source to the download URL
-      var img = document.createElement("img");
-      img.src = url;
-
-      // Append the image element to a container element (e.g., a div)
-      var container = document.getElementById("photos-container");
-      container.appendChild(img);
-    }).catch(function(error) {
-      console.log("Error getting download URL:", error);
-    });
   });
 }).catch(function(error) {
   console.log("Error retrieving photos from Firebase Storage:", error);

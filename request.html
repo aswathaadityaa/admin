@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>REQUESTS</title>
-  <style>
+ <style>
     /* Add custom CSS styles */
     body {
       font-family: Arial, sans-serif;
@@ -39,7 +39,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family:Fjalla One;
+      font-family: Fjalla One;
     }
     h1 {
       margin: 0;
@@ -67,9 +67,7 @@
       font-size: 60%;
       text-align: end;
     }
-    #bookname {
-      list-style-type: none;
-      padding: 0;
+    #dogRequests {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -86,7 +84,7 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
     }
-    #photos-container{
+    #photos-container {
       width: 55px;
       height: 45px;
       object-fit: cover;
@@ -127,17 +125,36 @@
       cursor: pointer;
     }
     label {
-  display: block;
-  margin-bottom: 5px;
-}
+      display: block;
+      margin-bottom: 5px;
+    }
 
-.contact-button {
-  margin-top: 10px;
-  margin-bottom: 10px; /* Add margin-bottom to create space below the button */
-}
+    .contact-button {
+      margin-top: 10px;
+      margin-bottom: 10px; /* Add margin-bottom to create space below the button */
+    }
 
+    /* Floating button styles */
+    .floating-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
 
+    .floating-button a {
+      display: block;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: 4px;
+    }
 
+    .floating-button a:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 <body>

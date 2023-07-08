@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REQUESTS</title>
+  <style>
+    /* Add custom CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    .accept-button {
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px; /* Add any other desired margin */
+    }
+    .accept-button.false {
+      background-color: red;
+      color: white;
+    }
+    .accept-button.true {
+      background-color: green;
+      color: white;
+    }
+    header {
+      background-color: #333;
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family:Fjalla One;
+    }
+    h1 {
+      margin: 0;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav ul li {
+      margin-right: 10px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    main {
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 60%;
+      text-align: end;
+    }
+    #bookname {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .book-block {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    #photos-container{
+      width: 55px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 4px;
+      z-index: 1; /* Add this property to position the photo above other elements */
+    }
+    .book-details {
+      position: relative; /* Add this property to create a stacking context for the container */
+    }
+    h3 {
+      text-transform: uppercase;
+      margin: 0;
+      left: 0;
+      margin-bottom: 10px;
+    }
+    .author {
+      color: #777;
+      margin: 0;
+      font-style: italic;
+    }
+    .description {
+      font-size: 14px;
+      margin: 0;
+      margin-top: 10px;
+      text-align: justify;
+      font-family: system-ui;
+    }
+    .location-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.contact-button {
+  margin-top: 10px;
+  margin-bottom: 10px; /* Add margin-bottom to create space below the button */
+}
+
+
+
+  </style>
+</head>
+<body>
+  <main>
+    <div id="dogRequests"></div>
+  </main>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var firebaseConfig = {
+      apiKey: "AIzaSyBbu5SC8_3FV1yE-IrMutWykW2EADYQmlk",
+      authDomain: "shelf-2.firebaseapp.com",
+      databaseURL: "https://shelf-2-default-rtdb.firebaseio.com",
+      projectId: "shelf-2",
+      storageBucket: "shelf-2.appspot.com",
+      messagingSenderId: "507397179326",
+      appId: "1:507397179326:web:4c2369079020f5f7a49bef",
+      measurementId: "G-CQ9CENNL89"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    // Get a reference to the database service
+    var database = firebase.database();
+
+    // Reference to the "dogRequests" collection in the Firebase database
+    var dogRequestsRef = firebase.database().ref('dogRequests');
+
+
+dogRequestsRef.on('value', function(snapshot) {
+  var requests = snapshot.val();
+
+  // Clear the previous content of the "dogRequests" element
+  document.getElementById('dogRequests').innerHTML = '';
+
+  // Loop through each dog request
+  for (var requestId in requests) {
+    if (requests.hasOwnProperty(requestId)) {
+      var request = requests[requestId];
+
+      // Create an HTML element to display the request details
+      var requestElement = document.createElement('div');
+      requestElement.classList.add('book-block');
+
+      var bookNameElement = document.createElement('h3');
+      bookNameElement.textContent = request.bookName;
+      requestElement.appendChild(bookNameElement);
+
+      var userNameElement = document.createElement('p');
+      userNameElement.textContent = 'User Name: ' + request.userName;
+      requestElement.appendChild(userNameElement);
+
+      var mobileNumberElement = document.createElement('p');
+      mobileNumberElement.textContent = 'Mobile Number: ' + request.mobileNumber;
+      requestElement.appendChild(mobileNumberElement);
+
+      var contactButton = document.createElement('button');
+contactButton.textContent = 'Contacted';
+contactButton.classList.add('accept-button');
+contactButton.classList.add('contact-button'); // Add the "contact-button" class
+contactButton.dataset.requestId = requestId;
+
+      // Set the button color based on the value of the "contacted" property
+      var contacted = request.contacted;
+      if (contacted) {
+        contactButton.classList.add('true');
+        contactButton.textContent = 'Contacted';
+      } else {
+        contactButton.classList.add('false');
+        contactButton.textContent = 'Contact';
+      }
+      
+      contactButton.addEventListener('click', markAsContacted);
+      requestElement.appendChild(contactButton);
+
+      var textarea = document.createElement('textarea');
+      textarea.placeholder = 'Enter a message';
+      textarea.dataset.requestId = requestId;
+      requestElement.appendChild(textarea);
+
+      var saveButton = document.createElement('button');
+      saveButton.textContent = 'Save';
+      saveButton.dataset.requestId = requestId;
+      saveButton.addEventListener('click', saveMessage);
+      requestElement.appendChild(saveButton);
+
+      var messagesContainer = document.createElement('div');
+      messagesContainer.dataset.requestId = requestId;
+      requestElement.appendChild(messagesContainer);
+
+      var messages = request.messages || [];
+      messages.forEach(function(message) {
+        var label = document.createElement('label');
+        label.textContent = 'Message: ' + message;
+        messagesContainer.appendChild(label);
+      });
+
+      document.getElementById('dogRequests').appendChild(requestElement);
+    }
+  }
+});
+
+// Function to handle the "Contacted" button click
+function markAsContacted(event) {
+  var requestId = event.target.dataset.requestId;
+  var requestRef = dogRequestsRef.child(requestId);
+
+  // Retrieve the current value of the "contacted" property
+  requestRef.once('value', function(snapshot) {
+    var contacted = snapshot.child('contacted').val();
+
+    // Update the "contacted" property to the opposite value in the Firebase database
+    requestRef.update({
+      contacted: !contacted
+    }).then(function() {
+      console.log('Dog request marked as contacted.');
+    }).catch(function(error) {
+      console.error('Error marking dog request as contacted:', error);
+    });
+  });
+}
+
+
+function saveMessage(event) {
+  var requestId = event.target.dataset.requestId;
+  var requestRef = dogRequestsRef.child(requestId);
+
+  // Get the entered message from the text area
+  var textarea = document.querySelector('textarea[data-request-id="' + requestId + '"]');
+  var message = textarea.value.trim(); // Trim whitespace from the message
+
+  // Check if the message is empty
+  if (message === '') {
+    return; // Exit the function if the message is empty
+  }
+
+  // Retrieve the existing messages from Firebase
+  requestRef.once('value', function(snapshot) {
+    var messages = snapshot.child('messages').val() || [];
+
+    // Check if the message already exists
+    if (!messages.includes(message)) {
+      // Add the new message to the array
+      messages.push(message);
+
+      // Update the "messages" property in the Firebase database
+      requestRef.update({
+        messages: messages
+      }).then(function() {
+        console.log('Message saved in Firebase.');
+
+        // Clear the existing labels in the messages container
+        var messagesContainer = document.querySelector('div[data-request-id="' + requestId + '"]');
+        messagesContainer.innerHTML = '';
+
+        // Create new labels for all the messages and append them to the messages container
+        messages.forEach(function(message) {
+          var label = document.createElement('label');
+          label.textContent = 'Message: ' + message;
+          messagesContainer.appendChild(label);
+
+          var lineBreak = document.createElement('br');
+          messagesContainer.appendChild(lineBreak);
+        });
+      }).catch(function(error) {
+        console.error('Error saving message in Firebase:', error);
+      });
+    }
+  });
+}
+
+
+  </script>
+</body>
+</html>

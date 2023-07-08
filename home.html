@@ -121,12 +121,37 @@
   border-radius: 4px;
   cursor: pointer;
 }
+/* Floating button styles */
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.floating-button a {
+  display: block;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.floating-button a:hover {
+  background-color: #45a049;
+}
+
   </style>
 </head>
 <body>
   <header>
     <h1>ADOPT ME <img src="https://clipart-library.com/images/BigrG6d8T.png" style="width:55px;height:40px;margin-left:10px;"></h1>
-   
+   <div class="floating-button">
+    <a href="request.html" target="_blank">Requests</a>
+  </div>
+
     <h2 id="myprofile"></h2>
   </header>
   <main>

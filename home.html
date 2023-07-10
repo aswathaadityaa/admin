@@ -237,7 +237,7 @@ booksRef.on('value', function(snapshot) {
 });
       var storage = firebase.storage();
 var storageRef = storage.ref();
-    // Retrieve the uploaded photos from Firebase Storage
+// Retrieve the uploaded photos from Firebase Storage
 storageRef.listAll().then(function(result) {
   result.items.forEach(function(itemRef) {
     itemRef.getDownloadURL().then(function(url) {
@@ -248,7 +248,6 @@ storageRef.listAll().then(function(result) {
       // Append the image element to a container element (e.g., a div)
       var container = document.getElementById("photos-container");
       container.appendChild(img);
-      container.appendChild(img.src);
     }).catch(function(error) {
       console.log("Error getting download URL:", error);
     });
@@ -256,6 +255,7 @@ storageRef.listAll().then(function(result) {
 }).catch(function(error) {
   console.log("Error retrieving photos from Firebase Storage:", error);
 });
+
 function acceptDog(event) {
  var bookId = event.target.dataset.bookId;
   // Update the accepted field of the corresponding book to true

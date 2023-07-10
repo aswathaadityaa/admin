@@ -157,11 +157,7 @@
   <main>
     <section id="books">
       <center>
-       
-         
- 
         <ul id="bookname" class="id="photos-container"> </ul>
-       
       </center>
     </section>
   </main>
@@ -235,7 +231,8 @@ booksRef.on('value', function(snapshot) {
     bookList.appendChild(bookBlock);
   });
 });
-      var storage = firebase.storage();
+    // ...
+var storage = firebase.storage();
 var storageRef = storage.ref();
 // Retrieve the uploaded photos from Firebase Storage
 storageRef.listAll().then(function(result) {
@@ -244,7 +241,7 @@ storageRef.listAll().then(function(result) {
       // Create an image element and set its source to the download URL
       var img = document.createElement("img");
       img.src = url;
-
+      
       // Append the image element to a container element (e.g., a div)
       var container = document.getElementById("photos-container");
       container.appendChild(img);
@@ -255,6 +252,7 @@ storageRef.listAll().then(function(result) {
 }).catch(function(error) {
   console.log("Error retrieving photos from Firebase Storage:", error);
 });
+// ...
 
 function acceptDog(event) {
  var bookId = event.target.dataset.bookId;
